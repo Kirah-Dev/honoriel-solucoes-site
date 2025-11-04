@@ -100,5 +100,3 @@ Repositório oficial do site institucional e sistema de gestão para a consultor
 
 O site estará disponível em `http://127.0.0.1:5000`.
 
----
-```    *   **Importante:** Na linha `![Honoriel Logo](...)`, eu apontei para o caminho relativo da imagem do anjo. O GitHub deve conseguir exibi-la. Na linha `git clone ...`, não se esqueça de substituir `seu-usuario/honoriel-solucoes-site.git` pela URL real do seu repositório.
