@@ -1,6 +1,6 @@
 # Honoriel Soluções - Site Institucional e Plataforma de RH
 
-![Honoriel Logo](backend/static/images/anjo_honoriel.png)
+![Honoriel Logo](static/images/anjo_honoriel.png)
 
 Repositório oficial do site institucional e sistema de gestão para a consultoria de RH **Honoriel Soluções**. Este é um projeto full-stack desenvolvido para fortalecer a presença online da empresa e otimizar seus processos de recrutamento e gerenciamento de conteúdo.
 
