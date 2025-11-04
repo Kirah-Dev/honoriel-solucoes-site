@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Para Candidatos - Honoriel Soluções{% endblock %}
+
+{% block content %}
+<!-- Hero Section - Candidatos -->
+<section id="hero-candidatos">
+  <div class="hero-content">
+    <h1>Sua Próxima Oportunidade Profissional Começa Aqui</h1>
+    <p>A Honoriel conecta talentos a grandes empresas e oferece suporte para o desenvolvimento de carreira.</p>
+    <div class="btnbtn-primary"><a href="{{ url_for('cadastro_curriculo') }}" class="btn btn-primary">Cadastre seu
+        Currículo <i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
+
+<!-- Seção "Manual do Candidato" -->
+<section id="manual-candidato">
+  <div class="manual-title">
+    <h1>Manual do Candidato</h1>
+  </div>
+  <div class="manual-wrapper">
+    <div class="manual-image">
+      <img src="/static/images/manual_cover.png" alt="Capa do Manual do Candidato">
+    </div>
+    <div class="manual-text">
+      <h3>Prepare-se Para o Sucesso</h3>
+      <p>Acesse nosso guia completo e gratuito com dicas essenciais: da elaboração do currículo perfeito à sua
+        postura na entrevista. Queremos ver você brilhar!</p>
+      <a href="/static/documents/manual_do_candidato.pdf" class="btn btn-primary" download>Baixar o Manual</a>
+    </div>
+  </div>
+</section>
+
+<!-- Seção "Sua Jornada Conosco" -->
+<section id="jornada-conosco">
+  <div class="div-title-bg">
+    <h2>Sua Jornada Conosco</h2>
+  </div>
+  <div class="jornada-steps">
+    <!-- Card 1 -->
+    <div class="step-card">
+      <div class="step-icon"><i class="fa-regular fa-file-lines"></i></div>
+      <h3>Cadastro com Propósito</h3>
+      <p>Você preenche seu perfil em nossa plataforma de forma rápida e segura, destacando suas skills, experiências
+        e,
+        o mais importante, seus objetivos de carreira.</p>
+    </div>
+
+    <!-- Trilha em "S" (CÓDIGO FINAL) -->
+    <div class="jornada-path">
+      <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M 0 25 C 0 75, 100 25, 100 75" stroke="var(--color-secondary)" stroke-width="2.5" fill="none"
+          stroke-dasharray="4,4" />
+      </svg>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="step-card">
+      <div class="step-icon"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+      <h3>Análise Estratégica</h3>
+      <p>Nossa equipe de especialistas analisa seu perfil com um olhar humano e estratégico, cruzando seu propósito
+        com
+        a cultura e as necessidades de empresas incríveis.</p>
+    </div>
+
+    <!-- Trilha em "S" (CÓDIGO FINAL) -->
+    <div class="jornada-path">
+      <svg width="100%" height="100%" viewBox="0 0 100 100" preserveAspectRatio="none">
+        <path d="M 0 25 C 0 75, 100 25, 100 75" stroke="var(--color-secondary)" stroke-width="2.5" fill="none"
+          stroke-dasharray="4,4" />
+      </svg>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="step-card">
+      <div class="step-icon"><i class="fa-regular fa-handshake"></i></div>
+      <h3>Oportunidades Reais</h3>
+      <p>Quando encontramos a combinação perfeita, conectamos você ao processo seletivo. Mais que uma vaga,
+        apresentamos
+        um caminho para você voar o seu extraordinário.</p>
+    </div>
+  </div>
+</section>
+{% endblock %}

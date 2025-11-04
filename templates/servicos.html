@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block title %}Nossos Serviços - Honoriel Soluções{% endblock %}
+
+{% block content %}
+<!-- Bloco de Abertura -->
+<section id="servicos-header">
+  <h1>Soluções sob medida para o crescimento do seu negócio</h1>
+  <p>Cada empresa tem sua própria história — e a Honoriel constrói soluções de RH personalizadas, que unem estrutura,
+    propósito e resultados. Mais do que preencher vagas, nosso papel é <strong>fortalecer a gestão de pessoas</strong>
+    para que sua equipe alcance a excelência.</p>
+</section>
+
+<!-- Grid de Serviços -->
+<section id="servicos-grid">
+  <div class="servico-card">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <h3>Recrutamento e Seleção por Competências</h3>
+    <p>Processo personalizado para atrair e selecionar talentos alinhados à cultura e aos desafios da sua empresa.</p>
+    <div class="servico-detalhes">
+      <strong>Inclui:</strong> Entrevistas por competências, parecer técnico-comportamental, mapeamento e hunting.
+    </div>
+  </div>
+
+  <div class="servico-card">
+    <i class="fa-solid fa-bullseye"></i>
+    <h3>Mapeamento Estratégico de Talentos</h3>
+    <p>Identificamos perfis, competências e potencialidades dentro da sua equipe para subsidiar promoções e planos de
+      crescimento.</p>
+    <div class="servico-detalhes">
+      <strong>Inclui:</strong> Análise de perfil, plano visual de talentos ( Nine Box) e devolutivas para gestores.
+    </div>
+  </div>
+
+  <div class="servico-card">
+    <i class="fa-solid fa-chart-pie"></i>
+    <h3>Diagnóstico Organizacional e Clima</h3>
+    <p>Analisamos a estrutura, práticas de gestão e percepções da equipe para identificar pontos de melhoria que
+      impactam o desempenho.</p>
+    <div class="servico-detalhes">
+      <strong>Inclui:</strong> Entrevistas, questionário de clima e relatório de insights.
+    </div>
+  </div>
+
+  <div class="servico-card">
+    <i class="fa-solid fa-flag"></i>
+    <h3>Identidade Organizacional e Cultura</h3>
+    <p>Relacionamos os pilares que sustentam o propósito da empresa: missão, visão e valores.</p>
+    <div class="servico-detalhes">
+      <strong>Inclui:</strong> Workshop com sócios, definição da cultura e integração de novos colaboradores.
+    </div>
+  </div>
+
+  <div class="servico-card">
+    <i class="fa-solid fa-users"></i>
+    <h3>Estruturação de Liderança</h3>
+    <p>Apoiamos os gestores na formação ou reposição de líderes, desenvolvendo competências-chave para o negócio.</p>
+    <div class="servico-detalhes">
+      <strong>Inclui:</strong> Mentoria individual, PDI e acompanhamento.
+    </div>
+  </div>
+
+  <div class="servico-card">
+    <i class="fa-solid fa-clipboard-list"></i>
+    <h3>Organização de Processos Internos</h3>
+    <p>Padronização de fluxos e procedimentos (caixa, vendas, atendimento, rotinas de RH) para otimizar o tempo e a
+      produtividade.</p>
+    <div class="servico-detalhes">
+      <strong>Inclui:</strong> Mapeamento de processos, fluxogramas e treinamento prático da equipe.
+    </div>
+  </div>
+
+  <div class="servico-card">
+    <i class="fa-solid fa-magnifying-glass-dollar"></i>
+    <h3>Estrutura de Remuneração e Pesquisa Salarial</h3>
+    <p>Desenhamos políticas salariais justas e sustentáveis, equilibrando motivação, desempenho e saúde financeira.</p>
+    <div class="servico-detalhes">
+      <strong>Inclui:</strong> Pesquisa de mercado, definição de cargos e remuneração, e plano de carreira.
+    </div>
+  </div>
+
+  <div class="servico-card">
+    <i class="fa-solid fa-users-gear"></i>
+    <h3>Gestão de Pessoas e Desligamento Estratégico</h3>
+    <p>Auxiliamos a conduzir desligamentos de forma humanizada, respeitosa e assertiva, preservando a imagem da empresa.
+    </p>
+    <div class="servico-detalhes">
+      <strong>Inclui:</strong> Suporte ao gestor, condução de entrevista de desligamento e orientação estratégica.
+    </div>
+  </div>
+
+  <div class="servico-card">
+    <i class="fa-solid fa-puzzle-piece"></i>
+    <h3>Projetos Personalizados de Consultoria</h3>
+    <p>Cada empresa vive um momento único. Desenvolvemos projetos sob medida para atender às reais necessidades do
+      negócio.</p>
+    <div class="servico-detalhes">
+      <strong>Inclui:</strong> Imersão e desenho de projetos estratégicos de pessoas.
+    </div>
+  </div>
+</section>
+
+<!-- Bloco de CTA Final -->
+<section id="cta-final-servicos">
+  <h2>Pronta para Iniciar a Transformação?</h2>
+  <a href="{{ url_for('contato') }}" class="btn btn-primary">Quero Meu Projeto de RH Sob Medida</a>
+</section>
+{% endblock %}

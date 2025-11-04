@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}Honoriel Soluções{% endblock %}</title>
+
+    <!-- Fontes e Ícones -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Playfair+Display:wght@700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <script src="https://unpkg.com/imask"></script>
+    <!-- Seu CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- ======================================================= -->
+    <!-- SEU HEADER EXATO, APENAS COM O LINK DO BLOG CORRIGIDO -->
+    <!-- ======================================================= -->
+    <header id="main-header">
+        <nav>
+            <a href="{{ url_for('home') }}" class="logo">
+                <img src="{{ url_for('static', filename='images/anjo_honoriel.png') }}" alt="Honoriel Soluções em RH">
+                <span>Honoriel</span>
+            </a>
+
+            <!-- O menu de navegação que já existe -->
+            <ul>
+                <li><a href="{{ url_for('home') }}">Home</a></li>
+                <li><a href="{{ url_for('candidatos') }}">Candidatos</a></li>
+                <li><a href="{{ url_for('empresas') }}">Empresas</a></li>
+                <li><a href="{{ url_for('servicos') }}">Serviços</a></li>
+                <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+                <li><a href="{{ url_for('blog_list') }}">Blog</a></li>
+                <li><a href="{{ url_for('contato') }}">Contato</a></li>
+            </ul>
+
+            <!-- NOVO: Botão Hambúrguer -->
+            <button id="hamburger-btn" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </nav>
+    </header>
+
+    <main>
+        {# ===== BLOCO PARA EXIBIR MENSAGENS FLASH ===== #}
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="flash-messages-container">
+            {% for category, message in messages %}
+            <div class="flash-message flash-{{ category }}">
+                {{ message }}
+                <span class="close-flash" onclick="this.parentElement.style.display='none';">&times;</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+        {# ========================================== #}
+
+        {% block content %}{% endblock %}
+
+    </main>
+
+    <!-- ======================================================= -->
+    <!-- SEU FOOTER EXATO, COM OS LINKS CORRIGIDOS -->
+    <!-- ======================================================= -->
+    <footer>
+        <div class="footer-content">
+            <!-- Coluna 1: Contatos -->
+            <div class="contact-info">
+                <h3>Contatos</h3>
+                <p><a href="https://wa.me/5522997360230" target="_blank"><i class="fa-brands fa-whatsapp"></i> (22)
+                        99736-0230</a>
+                </p>
+                <p><a href="https://www.instagram.com/honorielsolucoes" target="_blank"><i
+                            class="fa-brands fa-instagram"></i>
+                        @honorielsolucoes</a></p>
+                <p><a href="mailto:rhesolucoesconsultivas@gmail.com"><i class="fa-regular fa-envelope"></i>
+                        rhesolucoesconsultivas@gmail.com</a></p>
+                <p><i class="fa-solid fa-location-dot"></i> Atendimento 100% online a todo Brasil.</p>
+            </div>
+
+            <!-- Coluna 2: Links do Meio -->
+            <div class="footer-middle-column">
+                <div class="quick-links">
+                    <h3>Consultas</h3>
+                    <ul>
+                        <!-- CORREÇÃO: troquei '#' pela rota correta -->
+                        <li><a href="{{ url_for('politica_privacidade') }}"><i class="fa-solid fa-lock"></i> Política de
+                                Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="quick-links">
+                    <h3>Regras Básicas</h3>
+                    <ul>
+                        <!-- CORREÇÃO: troquei '#' pela rota correta -->
+                        <li><a href="{{ url_for('termos_de_uso') }}"><i class="fa-regular fa-file-lines"></i> Termos de
+                                Uso e Consentimento</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Coluna 3: Logo -->
+            <div class="footer-logo">
+                <!-- CORREÇÃO: usei url_for para garantir que o caminho da imagem esteja sempre certo -->
+                <img src="{{ url_for('static', filename='images/logo_honoriel2.png') }}" alt="Honoriel Soluções em RH">
+            </div>
+        </div>
+
+        <!-- Linha de Copyright -->
+        <div class="footer-copyright">
+            <p>© 2025 Honoriel - Soluções em RH. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    {% block modals %}{% endblock %}
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const hamburgerBtn = document.getElementById('hamburger-btn');
+            const navMenu = document.querySelector('header nav ul');
+
+            hamburgerBtn.addEventListener('click', function () {
+                // Adiciona/remove a classe 'open' no botão e no menu
+                hamburgerBtn.classList.toggle('open');
+                navMenu.classList.toggle('open');
+            });
+        });
+    </script>
+
+</body>
+
+</html>

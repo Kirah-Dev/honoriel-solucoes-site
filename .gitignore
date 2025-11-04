@@ -1,0 +1,41 @@
+# Ambiente Virtual
+venv/
+.venv/
+env/
+.env
+
+# Arquivos de Cache e Compilados do Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Arquivos de IDE e Editor
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Arquivos de Sistema Operacional
+.DS_Store
+Thumbs.db
+
+# Arquivos de Banco de Dados Local (se você usar SQLite)
+*.sqlite3
+*.db
+
+# Pasta de Uploads (se você não quiser versionar os uploads de teste)
+# Comente a linha abaixo se quiser manter os uploads de teste no backup
+/backend/uploads/
+
+# Arquivos de Teste e Cobertura
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Arquivos de Instalação do Python
+*.egg-info/
+dist/
+build/

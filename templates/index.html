@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+
+{% block title %}Início - Honoriel Soluções{% endblock %}
+
+{% block content %}
+
+<!-- Hero Section -->
+<section id="hero">
+  <div class="hero-content-left"> <!-- Nova div para o conteúdo da esquerda -->
+    <h1>A transformação da sua organização começa aqui!</h1>
+    <p>O crescimento da sua empresa começa com escolhas estratégicas, e isso inclui as pessoas certas. Mais que
+      recrutamento, entregamos uma consultoria completa em gestão de pessoas.</p>
+    <div class="hero-actions">
+      <a href="/contato" class="btn btn-primary">Acione Seu Sucesso Agora!</a><br><br>
+      <a href="/candidatos" class="btn btn-secondary">Sou Candidato</a>
+      <a href="/empresas" class="btn btn-secondary">Sou Empresa</a>
+    </div>
+  </div>
+  <div class="hero-logo-right"> <!-- Nova div para o logo da direita -->
+    <img src="/static/images/logo_honoriel.png" alt="Honoriel Soluções em RH Logo">
+  </div>
+</section>
+
+<!-- Seção "O Que Nos Move" -->
+<section id="o-que-nos-move">
+  <h2>O Que Nos Move</h2>
+  <div class="content-wrapper">
+    <div class="mission-values">
+      <div class="item">
+        <div class="item-header"> <!-- Container para ícone e título -->
+          <i class="fa-regular fa-circle-dot"></i> <!-- Ícone para Missão -->
+          <h3>Missão</h3>
+        </div>
+        <p>A Honoriel atua como uma ponte estratégica de RH, conectando talentos a grandes empresas e oferecendo
+          suporte para o desenvolvimento profissional.</p>
+      </div>
+      <div class="item">
+        <div class="item-header">
+          <i class="fa-regular fa-eye"></i> <!-- Ícone para Visão -->
+          <h3>Visão</h3>
+        </div>
+        <p>A empresa almeja ser reconhecida como uma capacidade de transformar a cultura organizacional,
+          impulsionando a performance e o engajamento.</p>
+      </div>
+      <div class="item">
+        <div class="item-header">
+          <i class="fa-regular fa-gem"></i> <!-- Ícone para Valores -->
+          <h3>Valor</h3>
+        </div>
+        <p>Na Honoriel, valorizamos a integridade, clareza, respeito e paixão pelo trabalho. Acreditamos no
+          potencial humano e na busca constante por excelência.</p>
+      </div>
+    </div>
+    <div class="image-placeholder">
+      <img src="/static/images/renata_ribeiro_perfil.jpg" alt="Renata Ribeiro - Fundadora Honoriel Soluções em RH">
+    </div>
+  </div>
+</section>
+
+<!-- Seção "O que a Honoriel pode fazer por você" -->
+<section id="o-que-fazer">
+  <h2>O que a Honoriel pode fazer por você</h2>
+  <p class="intro-text">Na Honoriel, acreditamos que o verdadeiro crescimento começa nas pessoas. Com uma abordagem
+    centrada no desenvolvimento humano, entregamos uma consultoria que estrutura o RH com propósito, clareza e
+    resultados.</p>
+  <div class="services-grid">
+    <div class="service-card card-bg-1"> <!-- Adicionada classe de background -->
+      <div class="card-icon"><i class="fas fa-sitemap"></i></div> <!-- Ícone adicionado -->
+      <h3>Estrutura e Diagnóstico Organizacional</h3>
+      <p>Desenvolvemos a base para transformar a cultura e o desempenho organizacional.</p>
+      <p class="highlight">O primeiro passo para transformar a cultura em resultados.</p>
+    </div>
+    <div class="service-card card-bg-2"> <!-- Adicionada classe de background -->
+      <div class="card-icon"><i class="fas fa-user-tie"></i></div> <!-- Ícone adicionado -->
+      <h3>Desenvolvimento de Pessoas e Liderança</h3>
+      <p>Apoiamos líderes e equipes na construção de programas de desenvolvimento e capacitação.</p>
+      <p class="highlight">Pessoas engajadas constroem empresas extraordinárias.</p>
+    </div>
+    <div class="service-card card-bg-3"> <!-- Adicionada classe de background -->
+      <div class="card-icon"><i class="fas fa-handshake"></i></div> <!-- Ícone adicionado -->
+      <h3>Recrutamento e Projetos Sob Medida</h3>
+      <p>Conectamos talentos alinhados ao propósito e à cultura da sua empresa.</p>
+      <p class="highlight">Cada empresa tem seu ritmo. A Honoriel ajuda a encontrá-lo.</p>
+    </div>
+  </div>
+  <div class="manifesto-content">
+    <a href="/servicos" class="btn btn-primary">Conheça Todas as Soluções</a>
+  </div>
+
+</section>
+
+<!-- Seção "Quem Confia na Honoriel" -->
+<section id="quem-confia">
+  <h2>Quem Confia na Honoriel</h2>
+  <div class="partners-logos">
+    <img src="/static/images/clientes/logo_velos.jpg" alt="Vélos Consultoria">
+    <img src="/static/images/clientes/logo_doutorsm.jpeg" alt="Doutor SM Contabilidade">
+    <img src="/static/images/clientes/logo_auditec.jpg" alt="Auditec Contabilidade">
+  </div>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <div class="card-header">
+        <img src="/static/images/anjo_honoriel.png" alt="Honoriel Icon"> <!-- Ícone da Honoriel -->
+        <h3>Vélos Consultoria</h3> <!-- Nome do cliente -->
+      </div>
+      <p class="card-highlight">Clareza para Decisão Estratégica</p> <!-- Novo para destaque -->
+      <p>Realizamos uma análise comparativa de custos entre modelos de contratação para subsidiar a gestão. O
+        resultado foi um
+        relatório claro que forneceu segurança e embasamento para a melhor decisão financeira e estratégica da
+        empresa.</p>
+    </div>
+    <div class="testimonial-card">
+      <div class="card-header">
+        <img src="/static/images/anjo_honoriel.png" alt="Honoriel Icon">
+        <h3>Doutor SM Contabilidade</h3>
+      </div>
+      <p class="card-highlight">Assertividade na Contratação</p>
+      <p>Conduzimos o processo seletivo para o Departamento Fiscal com foco em alinhamento técnico e cultural. A
+        profissional
+        selecionada demonstrou rápida integração e tornou-se um pilar estratégico para a equipe.</p>
+    </div>
+    <div class="testimonial-card">
+      <div class="card-header">
+        <img src="/static/images/anjo_honoriel.png" alt="Honoriel Icon">
+        <h3>Auditec Contabilidade e Assessoria</h3>
+      </div>
+      <p class="card-highlight">Renovação e Leitura para o DP</p>
+      <p>Realizamos o processo seletivo completo para o Departamento Pessoal, incluindo a elaboração da descrição de
+        cargos. O
+        projeto atraiu talentos que trouxeram renovação e força produtiva ao setor, gerando um impacto estratégico
+        positivo no
+        escritório.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Seção "Nosso Manifesto" -->
+<section id="manifesto">
+  <h2>Nosso Manifesto</h2>
+  <div class="manifesto-content">
+    <p>A Honoriel não nasceu para competir com o comum, nasceu para criar o novo.</p>
+    <a href="/sobre" class="btn btn-primary">Conheça Nosso Manifesto Completo</a>
+  </div>
+</section>
+
+<!-- Seção "Blog em Destaque" -->
+<section id="blog-destaque">
+  <h2>Blog em Destaque</h2>
+
+  {% if posts %}
+  <div class="blog-grid-public"> <!-- Usando a mesma classe da página do blog para consistência -->
+
+    {% for post in posts %}
+    <article class="blog-card-public">
+      <a href="{{ url_for('blog_post', post_id=post.id) }}" class="card-image-link">
+        {% if post.imagem_destaque_path %}
+        <img src="{{ url_for('view_upload', filename=post.imagem_destaque_path) }}"
+          alt="Imagem de destaque para {{ post.titulo }}">
+        {% else %}
+        <img src="https://via.placeholder.com/400x250.png?text=Honoriel" alt="Imagem padrão">
+        {% endif %}
+      </a>
+      <div class="card-content">
+        <h2 class="post-title">
+          <a href="{{ url_for('blog_post', post_id=post.id) }}">{{ post.titulo }}</a>
+        </h2>
+        <p class="post-excerpt">
+          {{ post.conteudo | striptags | truncate(120) }}
+        </p>
+        <a href="{{ url_for('blog_post', post_id=post.id) }}" class="read-more-link">Leia Mais &rarr;</a>
+      </div>
+    </article>
+    {% endfor %}
+
+  </div>
+  {% else %}
+  <p>Nenhum post encontrado no momento. Volte em breve!</p>
+  {% endif %}
+
+</section>
+{% endblock %}

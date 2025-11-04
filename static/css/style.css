@@ -1,0 +1,2305 @@
+/* Variáveis CSS para Cores */
+:root {
+    --color-primary: #6C0B29; /* Vinho / Bordô */
+    --color-secondary: #B89A50; /* Dourado */
+    --color-dark-gray: #333;
+    --color-medium-gray: #666;
+    --color-light-gray: #D9D9D9;
+    --color-white: #ffffff;
+    --color-black: #000000;
+}
+
+/* Reset Básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif; /* Open Sans para o corpo do texto */
+    line-height: 1.6;
+    color: var(--color-dark-gray);
+    background-color: var(--color-white);
+}
+
+main {
+    position: relative;
+    z-index: 1; /* Define a camada do conteúdo principal como 1 */
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-primary);
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+ul {
+    list-style: none;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block; /* Remove espaço extra abaixo de imagens */
+}
+
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif; /* Playfair Display para os títulos */
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+/* Layout Geral */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+section {
+    padding: 60px 0;
+    text-align: center;
+}
+
+
+
+/* Header */
+#main-header {
+    background-color: var(--color-white); /* Fundo sólido e opaco */
+    padding: 15px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    position: sticky; /* Fica no topo ao rolar */
+    top: 0;
+    z-index: 1000; /* Garante que fique acima de tudo */
+    width: 100%;
+}
+
+
+header nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px; /* Largura máxima do conteúdo */
+    margin: 0 auto;    /* Centraliza o conteúdo (nav) */
+    padding: 0 20px;   /* Adiciona espaçamento nas laterais para telas menores */
+}
+
+header .logo {
+    display: flex; /* Para alinhar a imagem e o texto */
+    align-items: center;
+    gap: 10px; /* Espaço entre a imagem e o texto */
+}
+
+header .logo img {
+    height: 80px; /* Ajuste o tamanho do logo */
+}
+
+header .logo span { /* Estilo para o nome Honoriel */
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--color-primary);
+    font-weight: bold;
+}
+
+header nav ul {
+    display: flex;
+}
+
+header nav ul li {
+    margin-left: 30px;
+}
+
+header nav ul li a {
+    color: var(--color-primary);
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: var(--color-secondary);
+    text-decoration: none;
+}
+
+
+
+/* Hero Section */
+#hero {
+    background-image: url('/static/images/bg/Bg_dourado.png'); /* Sua imagem de background */
+    background-size: cover; /* Cobre toda a área */
+    background-position: center center;
+    background-repeat: no-repeat;
+    padding: 30px 0;
+    display: flex; /* Para alinhar o conteúdo e o logo */
+    justify-content: center;
+    align-items: center;
+    min-height: 400px; /* Aumenta a altura mínima para acomodar a imagem */
+    position: relative;
+    overflow: hidden;
+    color: var(--color-white); /* Cor do texto para contraste com o fundo */
+}
+
+#hero::before { /* Logo em marca d'água */
+    content: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%; /* Ajuste o tamanho */
+    height: 80%; /* Ajuste o tamanho */
+    background-image: url('/static/images/logo_honoriel.png');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.1; /* Transparência para marca d'água */
+    z-index: 1;
+}
+
+#hero .hero-content {
+    max-width: 500px;
+    z-index: 2; /* Garante que o conteúdo fique acima da marca d'água */
+}
+
+#hero .hero-content-left {
+    max-width: 50%; /* Ocupa metade da largura para o texto */
+    text-align: left; /* Alinha o texto à esquerda */
+    padding-left: 5%; /* Adiciona um padding para não colar na borda */
+    z-index: 2;
+}
+
+#hero h1 {
+    color: var(--color-primary); /* Ajuste a cor do título para a imagem de fundo */
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para o título para melhor legibilidade */
+}
+
+#hero p {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    padding: 20px 0px;
+    color: var(--color-dark-gray); /* Ajuste a cor do parágrafo */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4); /* Sombra para o parágrafo */
+}
+
+#hero .hero-actions {
+    margin-top: 30px;
+}
+
+/* Estilo para o logo à direita */
+#hero .hero-logo-right {
+    max-width: 40%; /* Ajusta a largura da coluna do logo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
+#hero .hero-logo-right img {
+    max-width: 100%; /* Garante que a imagem se ajuste ao contêiner */
+    height: auto;
+    opacity: 0.9; /* Pequena opacidade para integrar melhor */
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 25px;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    margin: 0 10px;
+}
+
+.btn-primary {
+    background-color: var(--color-primary);
+    width: 350px;
+    color: var(--color-white);
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+.btn-primary:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+.btn-secondary {
+    background-color: var(--color-secondary);
+    color: var(--color-primary); /* Texto do botão secundário */
+    border: 1px solid var(--color-primary); /* Borda do botão secundário */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+}
+
+.btn-secondary:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border: 2px solid var(--color-primary);
+}
+
+.hero-actions {
+    margin-top: 30px;    
+    
+}
+
+
+/* Seção "O Que Nos Move" */
+#o-que-nos-move {
+    background-color: var(--color-white);
+    padding: 80px 0;
+}
+
+#o-que-nos-move .content-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+    max-width: 1200px;
+    margin: 40px auto 0 auto;
+    text-align: left;
+}
+
+#o-que-nos-move .mission-values {
+    flex: 2;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 30px;
+}
+
+#o-que-nos-move .mission-values .item {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-secondary); /* Borda dourada fina */
+    border-radius: 10px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08); /* Sombreado sutil */
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+#o-que-nos-move .mission-values .item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+#o-que-nos-move .item-header {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Espaço entre ícone e título */
+    margin-bottom: 15px;
+}
+
+#o-que-nos-move .item-header i {
+    font-size: 2.5rem; /* Tamanho do ícone */
+    color: var(--color-secondary); /* Cor do ícone */
+}
+
+#o-que-nos-move .item-header h3 {
+    margin-bottom: 0; /* Remove a margem padrão do H3 */
+}
+
+#o-que-nos-move .item p {
+    color: var(--color-medium-gray);
+}
+
+#o-que-nos-move .image-placeholder {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#o-que-nos-move .image-placeholder img {
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Seção "O que a Honoriel pode fazer por você" */
+#o-que-fazer {
+    background-color: var(--color-light-gray); /* Fundo cinza claro */
+    padding: 80px 0;
+}
+
+#o-que-fazer .intro-text {
+    max-width: 800px;
+    margin: 20px auto 40px auto;
+    font-size: 1.1rem;
+    color: var(--color-medium-gray);
+}
+
+#o-que-fazer .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto 40px auto;
+}
+
+#o-que-fazer .service-card {
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    text-align: left;
+    transition: transform 0.3s ease;
+    position: relative; /* Para o ícone ou background-image */
+    overflow: hidden; /* Garante que a imagem não vaze */
+    color: var(--color-white); /* Cor do texto para contraste */
+}
+
+#o-que-fazer .service-card::before { /* Pseudo-elemento para a imagem de fundo */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0.8; /* Ajuste a opacidade da imagem de fundo */
+    z-index: 0;
+}
+
+/* Imagens de fundo específicas para cada card */
+#o-que-fazer .card-bg-1::before {
+    background-image: url('/static/images/bg/Bg_dourado.png'); /* Sua imagem 1 */
+}
+#o-que-fazer .card-bg-2::before {
+    background-image: url('/static/images/bg/Bg_dourado.png'); /* Sua imagem 2 */
+}
+#o-que-fazer .card-bg-3::before {
+    background-image: url('/static/images/bg/Bg_dourado.png'); /* Sua imagem 3 */
+}
+
+#o-que-fazer .service-card h3,
+#o-que-fazer .service-card p,
+#o-que-fazer .service-card .highlight,
+#o-que-fazer .service-card .card-icon {
+    position: relative; /* Garante que o conteúdo fique acima da imagem */
+    z-index: 1;
+    color: var(--color-white); /* Garante texto branco sobre as imagens */
+}
+
+#o-que-fazer .service-card:hover {
+    transform: translateY(-5px);
+}
+
+#o-que-fazer .service-card h3 {
+    color: var(--color-secondary); /* Títulos em dourado */
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+#o-que-fazer .service-card p {
+    color: var(--color-dark-gray);
+    margin-bottom: 10px;
+}
+
+#o-que-fazer .service-card .highlight {
+    color: var(--color-primary); /* Destaque em dourado */
+}
+
+#o-que-fazer .service-card .card-icon {
+    font-size: 2.5rem; /* Tamanho dos ícones */
+    margin-bottom: 15px;
+    text-align: center; /* Centraliza o ícone */
+    width: 100%; /* Ocupa a largura total para centralização */
+}
+
+#o-que-fazer .btn-primary {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-secondary);
+    position: relative; /* Garante que o botão esteja acima da marca d'água */
+    z-index: 1;
+}
+
+#o-que-fazer .btn-primary:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+/* Seção "Quem Confia na Honoriel" */
+#quem-confia {
+    background-color: var(--color-white);
+    padding: 80px 0;
+}
+
+#quem-confia .partners-logos {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin: 40px auto;
+    max-width: 1000px;
+}
+
+#quem-confia .partners-logos img {
+    height: 200px; /* Define uma altura fixa para todas as logos */
+    width: auto; /* Permite que a largura se ajuste proporcionalmente */
+    max-width: 200px; /* Garante que logos muito largas não fiquem excessivas */
+    object-fit: contain; /* Garante que a imagem inteira seja visível dentro do espaço */
+    filter: grayscale(80%); /* Efeito de escala de cinza */
+    transition: filter 0.3s ease;
+}
+
+#quem-confia .partners-logos img:hover {
+    filter: grayscale(0%); /* Colorir ao passar o mouse */
+}
+
+/*
+=================================
+COMPONENTE: CARD DE DEPOIMENTO (GLOBAL)
+=================================
+*/
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 40px auto 0 auto;
+}
+
+.testimonial-card {
+    background-color: var(--color-white);
+    padding: 25px;
+    border-radius: 12px;
+    text-align: left;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    border: 1px solid #f0f0f0;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.testimonial-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+}
+
+.testimonial-card .card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.testimonial-card .card-header img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.testimonial-card .card-header h3 {
+    color: var(--color-dark-gray);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 0;
+    font-weight: 600;
+}
+
+.testimonial-card .card-highlight {
+    color: var(--color-primary);
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.testimonial-card p {
+    color: var(--color-medium-gray);
+    font-size: 0.95rem;
+}
+
+/* Seção "Nosso Manifesto" */
+#manifesto {
+    background-color: var(--color-light-gray); /* Fundo cinza claro */
+    color: var(--color-dark-gray);
+    padding: 80px 0;
+    position: relative; /* Essencial para posicionar o pseudo-elemento */
+    overflow: hidden; /* Garante que a marca d'água não vaze se for muito grande */
+}
+
+#manifesto::before { /* O pseudo-elemento para a marca d'água */
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 5%; /* Posiciona a marca d'água mais para a direita, como no print */
+    transform: translateY(-50%) translateX(20%); /* Ajuste fino de posição e centralização vertical */
+    width: 400px; /* Largura da marca d'água. Ajuste conforme necessário. */
+    height: 400px; /* Altura da marca d'água. Ajuste conforme necessário. */
+    background-image: url('/static/images/anjo_honoriel.png'); /* Caminho da sua imagem de marca d'água */
+    background-size: contain; /* Garante que a imagem inteira apareça */
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.15; /* Opacidade da marca d'água. Ajuste para mais ou menos visibilidade. */
+    z-index: 0; /* Garante que a marca d'água fique atrás do conteúdo */
+}
+
+#manifesto h1 {
+    color: var(--color-primary); /* Título dourado */
+    margin-bottom: 20px;
+    position: relative; /* Garante que o título esteja acima da marca d'água */
+    z-index: 1;
+}
+
+#manifesto .manifesto-content {
+    max-width: 800px;
+    margin: 0 auto;
+    position: relative; /* Garante que o conteúdo esteja acima da marca d'água */
+    z-index: 1;
+}
+
+#manifesto p {
+    font-family: 'Playfair Display', serif;
+    color: var(--color-dark-gray);
+    font-size: 2rem;
+    margin-bottom: 30px;
+    padding: 20px 0px;
+    font-style: italic;
+    font-weight: lighter;
+    position: relative; /* Garante que o parágrafo esteja acima da marca d'água */
+    z-index: 1;
+
+}
+
+/* Sobrescreve o botão primário para o manifesto */
+#manifesto .btn-primary {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border-color: var(--color-secondary);
+    position: relative; /* Garante que o botão esteja acima da marca d'água */
+    z-index: 1;
+}
+
+#manifesto .btn-primary:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+}
+
+/* Seção "Blog em Destaque" */
+#blog-destaque {
+    background-color: var(--color-white);
+    padding: 80px 0;
+}
+
+#blog-destaque .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 40px auto 0 auto;
+}
+
+#blog-destaque .blog-card {
+    background-color: var(--color-light-gray);
+    border-radius: 8px;
+    overflow: hidden;
+    text-align: left;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease;
+}
+
+#blog-destaque .blog-card:hover {
+    transform: translateY(-5px);
+}
+
+#blog-destaque .blog-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+#blog-destaque .blog-card h3 {
+    padding: 15px;
+    color: var(--color-primary);
+    font-size: 1.3rem;
+    margin-bottom: 0;
+}
+
+#blog-destaque .blog-card p {
+    padding: 0 15px 15px 15px;
+    color: var(--color-dark-gray);
+    font-size: 0.95rem;
+}
+
+#blog-destaque .blog-card .read-more {
+    display: block;
+    padding: 15px;
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    text-align: right;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+#blog-destaque .blog-card .read-more:hover {
+    background-color: var(--color-dark-gray);
+    text-decoration: none;
+}
+
+/*
+=================================
+AJUSTES ESPECÍFICOS PARA A HOME PAGE
+=================================
+*/
+
+/* --- Ajuste nos Cards do Blog na Home --- */
+
+/* 
+  Por padrão, em telas de desktop, o grid do blog usa 3 colunas.
+  Se quisermos cards menores, podemos forçar o grid a pensar que há mais colunas,
+  ou simplesmente limitar a largura máxima do grid.
+*/
+#blog-destaque .blog-grid-public {
+    max-width: 1100px; /* Limita a largura total da seção de cards */
+    margin: 40px auto 0 auto;
+}
+
+/* 
+  Regra principal: Diminui a altura da imagem dentro dos cards
+  APENAS quando eles estiverem dentro da seção #blog-destaque.
+*/
+#blog-destaque .blog-card-public .card-image-link img {
+    height: 180px; /* Reduz a altura da imagem de 220px para 180px */
+}
+
+/* 
+  Ajustes finos no texto para compensar o tamanho menor do card.
+*/
+#blog-destaque .blog-card-public .card-content {
+    padding: 20px; /* Um pouco menos de padding interno */
+}
+
+#blog-destaque .blog-card-public .post-title a {
+    font-size: 1.2rem; /* Título um pouco menor */
+}
+
+#blog-destaque .blog-card-public .post-excerpt {
+    font-size: 0.9rem; /* Resumo um pouco menor */
+    margin: 10px 0;
+}
+
+
+/* Footer */
+footer {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 60px 0 20px 0; /* Espaçamento vertical, sem espaçamento lateral */
+    width: 100%;
+}
+
+footer .footer-content {
+    max-width: 1200px; /* Largura máxima do conteúdo */
+    margin: 0 auto;    /* Centraliza o conteúdo */
+    padding: 0 20px;   /* Adiciona espaçamento nas laterais */
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+/* Colunas do Footer */
+.contact-info { flex-basis: 300px; flex-grow: 1; }
+.footer-middle-column { flex-basis: 250px; flex-grow: 1; }
+.footer-logo { flex-basis: 200px; flex-grow: 1;  }
+
+.footer-middle-column .quick-links:first-child {
+    margin-bottom: 30px; /* Espaço entre "Consultas" e "Regras Básicas" */
+}
+
+footer h3 {
+    color: var(--color-secondary);
+    margin-bottom: 10px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+}
+
+/* Estilo para itens com ícone (sem alterações) */
+footer p,
+footer ul li a {
+    font-size: smaller;
+    color: var(--color-white);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+footer i {
+    color: var(--color-secondary);
+    font-size: 1rem;
+    width: 20px;
+    text-align: center;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+
+}
+
+/* --- CORREÇÃO: Estilo para os links de contato no rodapé --- */
+
+.contact-info p a {
+    color: var(--color-white);      /* Garante que o texto do link seja branco */
+    text-decoration: none;          /* Remove o sublinhado padrão */
+    display: flex;                  /* Necessário para alinhar com o ícone */
+    align-items: center;
+    gap: 10px;
+    transition: color 0.3s ease;    /* Adiciona uma transição suave para o hover */
+}
+
+.contact-info p a:hover {
+    color: var(--color-secondary);  /* Muda a cor para dourado no hover */
+    text-decoration: none;          /* Garante que não apareça sublinhado no hover */
+}
+
+/* Alinhamento do Logo */
+footer .footer-logo {
+    display: flex;
+    justify-content: center; /* Alinha a imagem à direita do seu container */
+    align-items: center;
+    
+    
+}
+
+footer .footer-logo img {
+    max-width: 150px; /* Controla o tamanho máximo do logo */
+    height: auto;
+    
+}
+
+/* Linha e Texto de Copyright (sem alterações) */
+.footer-copyright {
+    max-width: 1200px; /* Alinha com o conteúdo acima */
+    margin: 40px auto 0 auto; /* Aumenta o espaço superior */
+    padding: 20px 20px 0 20px; /* Adiciona padding e o espaçamento superior */
+    border-top: 1px solid rgba(255, 215, 0, 0.3);
+    text-align: center;
+}
+
+.footer-copyright p {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    display: flex; /* Mantido para centralizar se necessário */
+    justify-content: center;
+}
+
+
+
+
+/* Responsividade Básica */
+@media (max-width: 992px) {
+
+    header nav {
+    justify-content: space-between;
+    }
+
+
+    #hero {
+        flex-direction: column; /* Empilha o conteúdo e o logo em telas menores */
+        text-align: center;
+        min-height: 500px;
+    }
+
+    #hero .hero-content-left {
+        max-width: 90%;
+        padding-left: 0;
+        margin-bottom: 40px;
+    }
+
+    #hero .hero-logo-right {
+        max-width: 60%; /* Logo um pouco maior em telas menores */
+        margin-top: 20px;
+    }
+
+    #o-que-nos-move .content-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    #o-que-nos-move .image-placeholder {
+        margin-top: 30px;
+    }
+
+    #o-que-nos-move .mission-values .item {
+        text-align: left; /* Mantém o texto alinhado à esquerda dentro do card */
+    }
+
+    footer .footer-content {
+        justify-content: flex-start; /* Alinha à esquerda em telas menores */
+    }
+    footer .footer-logo {
+        justify-content: center;
+        width: 100%;
+        margin-top: 20px;
+    }
+
+
+}
+
+@media (max-width: 768px) {
+    h1 { font-size: 2.2rem; }
+    h2 { font-size: 1.8rem; }
+    h3 { font-size: 1.3rem; }
+
+    header nav ul {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    header nav ul li {
+        margin: 0 10px 10px 10px;
+    }
+
+    #hero h1 {
+        font-size: 2.8rem;
+    }
+
+    #hero p {
+        font-size: 1.1rem;
+    }
+    header nav .logo span {
+        font-size: 1.4rem; /* Diminui o nome Honoriel no header em telas menores */
+    }
+
+    .btn {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+        margin: 5px;
+    }
+
+    .hero-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    /* Centraliza o texto dentro de cada coluna do footer */
+    footer .contact-info,
+    footer .footer-middle-column {
+        text-align: center;
+    }
+
+    /* Centraliza o conteúdo dos itens (ícone + texto) */
+    footer .contact-info p,
+    footer .quick-links a {
+        justify-content: center;
+    }
+
+    /* Garante que o logo também fique centralizado */
+    footer .footer-content {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    #hero h1 {
+        font-size: 2.2rem;
+    }
+    #hero .hero-logo-right {
+        max-width: 80%;
+    }
+}
+
+
+/*
+=================================
+PÁGINA CANDIDATOS
+=================================
+*/
+
+/* Hero Section - Candidatos */
+#hero-candidatos {
+    background-color: var(--color-light-gray);
+    padding: 50px 200px;
+    text-align: center;
+    border-bottom: 1px solid var(--color-primary);
+}
+
+#hero-candidatos .hero-content {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#hero-candidatos h1 {
+    font-size: 3rem;
+    color: var(--color-primary);
+}
+
+#hero-candidatos p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.9rem;
+    font-weight:lighter;
+    
+    color: var(--color-dark-gray);
+    margin-bottom: 30px;
+    padding: 30px;
+}
+
+#hero-candidatos .btn-primary {
+    background-color: var(--color-primary);
+    width: 350px;
+    color: var(--color-white);
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+#hero-candidatos .btn-primary:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+}
+
+#hero-candidatos .btn i {
+    margin-left: 10px;
+    transition: transform 0.3s ease;
+}
+
+#hero-candidatos .btn:hover i {
+    transform: translateX(5px);
+}
+
+/* Seção "Manual do Candidato" */
+#manual-candidato {
+    background-color: var(--color-light-gray);
+    border-bottom: 1px solid var(--color-primary);
+    text-align: center;
+    padding-left: 50px ;
+    padding-bottom: 80px;
+    
+}
+
+.manual-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    
+}
+
+#manual-candidato .btn-primary {
+    background-color: var(--color-primary);
+    width: 300px;
+    color: var(--color-white);
+    border: 2px solid var(--color-primary);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+#manual-candidato .btn-primary:hover {
+    background-color: var(--color-secondary);
+    color: var(--color-primary);
+    border-color: var(--color-primary);
+    
+}
+
+.manual-title {
+    padding-bottom: 50px;
+   
+}
+
+.manual-image {
+    flex: 1;
+    max-width: 150px;
+}
+
+.manual-image img {
+    border-radius: 10px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    size: 150px;
+    padding-top: 20px;
+}
+
+.manual-text {
+    flex: 1.5;
+    text-align: left;
+}
+
+
+
+.manual-text h2 {
+    font-size: 2.5rem;
+}
+
+.manual-text p {
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    color: var(--color-medium-gray);
+}
+
+
+/* Seção "Sua Jornada Conosco" */
+#jornada-conosco {
+    background-color: var(--color-light-gray);
+    padding-top: 0;
+    text-align: center;
+}
+
+#jornada-conosco h2 {
+    color: var(--color-white);
+    margin-bottom: 70px;
+    background-color: var(--color-primary);
+    padding: 15px;
+}
+
+.jornada-steps {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr auto 1fr;
+    align-items: center; /* Alinha tudo verticalmente ao centro */
+    gap: 0px;
+}
+
+.step-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-secondary);
+    padding: 70px 30px 40px 30px;
+    border-radius: 10px;
+    position: relative;
+}
+
+.step-icon {
+    width: 100px;
+    height: 100px;
+    position: absolute;
+    top: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background-color: var(--color-secondary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid var(--color-primary);
+}
+
+.step-icon i {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+}
+
+.step-card h3 {
+    color: var(--color-primary);
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.step-card p {
+    color: var(--color-medium-gray);
+}
+
+/* Estilo para as trilhas SVG "S" */
+.jornada-path {
+    width: 120px; /* Largura da trilha */
+    height: 100px; /* Altura da trilha */
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+    .jornada-steps {
+        grid-template-columns: 1fr;
+        gap: 80px;
+    }
+    .jornada-path {
+        display: none;
+    }
+    .step-card {
+        margin: 0 auto;
+        max-width: 400px;
+    }
+}
+
+/* Responsividade */
+@media (max-width: 992px) {
+    .jornada-steps {
+        grid-template-columns: 1fr; /* Empilha tudo em uma coluna */
+        gap: 80px; /* Aumenta o espaço entre os cards */
+    }
+    .jornada-path {
+        display: none; /* Esconde as trilhas em telas menores */
+    }
+    .step-card {
+        margin: 0 auto;
+        max-width: 400px; /* Limita a largura do card */
+    }
+}
+
+/* Responsividade para a Página Candidatos */
+@media (max-width: 992px) {
+    .manual-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+    .manual-text {
+        text-align: center;
+    }
+    .jornada-steps {
+        flex-direction: column;
+        align-items: center;
+    }
+    .jornada-steps::before { /* Esconde a linha horizontal em mobile */
+        content: none;
+    }
+    .step-card {
+        margin-bottom: 50px; /* Espaçamento entre os cards empilhados */
+    }
+}
+
+
+/*
+=================================
+PÁGINA EMPRESAS
+=================================
+*/
+
+/* Hero Section - Empresas */
+#hero-empresas {
+    background-color: var(--color-light-gray);
+    padding: 50px 0;
+    text-align: center;
+    border-bottom: 1px solid #B89A50;
+}
+#hero-empresas .hero-content { max-width: 900px; margin: 0 auto; }
+#hero-empresas h1 { font-size: 3rem; color: var(--color-primary); margin-bottom: 20px;}
+#hero-empresas p { font-size: 1.2rem; color: var(--color-dark-gray); margin-bottom: 50px; }
+
+/* Seção "Resultados Esperados" */
+#resultados-esperados {
+    background-color: var(--color-light-gray);
+    padding: 50px 0;
+    text-align: center;
+}
+.resultados-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 50px 20px;
+}
+.resultado-card {
+    background-color: var(--color-white);
+    padding: 40px;
+    border: 1px solid var(--color-white);
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.resultado-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+}
+.resultado-card i { font-size: 3rem; color: var(--color-secondary); margin-bottom: 20px; }
+.resultado-card h3 { font-size: 1.2rem; color: var(--color-dark-gray); }
+.resultado-card p { font-size: 1rem; color: var(--color-dark-gray); }
+
+/* Seção "Gerando Confiança" */
+#gerando-confianca {
+    background-color: var(--color-white); /* Garante o fundo branco */
+}
+
+#gerando-confianca .intro-text {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem; /* Um pouco maior */
+    color: var(--color-secondary); /* Cor dourado */
+    font-style: italic;
+    font-weight: lighter;
+    padding: 30px 0;
+}
+
+#gerando-confianca .outro-text {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.6rem;
+    font-style: italic;
+    font-weight: lighter;
+    color: #aaaaaa;
+    padding-top: 50px;
+    margin: 0 100px;
+}
+
+/* Override do estilo padrão .testimonial-card DENTRO desta seção */
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 20px auto 0 auto;
+    
+}
+
+.testimonial-card {
+    background-color: var(--color-white);
+    padding: 35px 40px; /* Mais padding */
+    border-radius: 20px; /* Bordas mais arredondadas */
+    text-align: left;
+    border: 1px solid var(--color-secondary); /* Borda dourada sutil */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05); /* Sombra suave */
+    position: relative;
+    display: flex;
+    flex-direction: column; /* Organiza o conteúdo em coluna */
+}
+
+.testimonial-card .quote-icon {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+/* Frase de destaque */
+.testimonial-card .main-quote {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    color: var(--color-dark-gray);
+    font-weight: bold;
+    margin-bottom: 20px;
+    line-height: 1.5;
+}
+
+/* Texto completo do depoimento */
+.testimonial-card .full-text {
+    color: var(--color-medium-gray);
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    flex-grow: 1; /* Faz este parágrafo ocupar o espaço disponível, empurrando o autor para baixo */
+}
+
+/* Informações do autor */
+.testimonial-card .author-info {
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+    text-align: right;
+}
+
+.testimonial-card .author-info span {
+    display: block; /* Um span abaixo do outro */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+}
+
+.testimonial-card .author-info .company {
+    font-weight: 600;
+    color: var(--color-dark-gray);
+    margin-bottom: 5px;
+}
+
+.testimonial-card .author-info .person {
+    font-weight: 400;
+    color: var(--color-medium-gray);
+}
+
+
+/* Seção "Especialistas" */
+#especialistas {
+    background-color: var(--color-primary);
+    padding: 80px 0;
+    text-align: center;
+    color: var(--color-white);
+}
+#especialistas h2 { color: var(--color-secondary); }
+#especialistas > p { max-width: 800px; margin: 0 auto 40px auto; opacity: 0.9; }
+
+.especialistas-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+.especialista-card {
+    background-color: rgba(255,255,255, 0.1);
+    border: 1px solid var(--color-secondary);
+    padding: 40px;
+    border-radius: 10px;
+    width: 300px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.especialista-card:hover { background-color: rgba(255,255,255, 0.2); }
+.especialista-card i { font-size: 3rem; color: var(--color-secondary); margin-bottom: 20px; }
+.especialista-card h3 { color: var(--color-white); }
+
+/* Seção CTA Final com Formulário */
+#cta-final-empresas {
+    background-color: var(--color-secondary);
+    padding: 80px 0;
+    text-align: center;
+}
+#cta-final-empresas h2 { color: var(--color-primary); }
+#cta-final-empresas p { color: var(--color-dark-gray); max-width: 600px; margin: 0 auto 30px auto; }
+.contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+    display: grid;
+    gap: 15px;
+}
+.contact-form input, .contact-form textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid var(--color-primary);
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+}
+.contact-form button { width: 100%; }
+
+/* Estilos do Modal */
+.modal {
+    display: none; /* Escondido por padrão */
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6); /* Fundo escuro semi-transparente */
+    backdrop-filter: blur(5px);
+}
+.modal-content {
+    background-color: #fefefe;
+    margin: 10% auto;
+    padding: 40px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    position: relative;
+    animation: fadeIn 0.5s;
+    text-align: justify;
+}
+
+/* --- Estilos para o Cabeçalho do Modal --- */
+.modal-header {
+    display: flex;
+    align-items: center; /* Alinha a foto e o texto verticalmente */
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee; /* Linha separadora */
+}
+
+.modal-header img {
+    width: 150px;      /* Largura da imagem (ajuste se quiser um pouco maior ou menor) */
+    height: 150px;     /* Altura da imagem (deve ser igual à largura) */
+    border-radius: 50%; /* A mágica para deixar a imagem redonda */
+    object-fit: cover;  /* Garante que a imagem preencha o círculo sem distorcer */
+    margin-right: 20px;
+    border: 2px solid var(--color-light-gray); /* Borda sutil (opcional) */
+}
+
+.modal-header .modal-title {
+    flex: 1;
+}
+
+.modal-header h3 {
+    margin: 0 0 5px 0;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    color: var(--color-primary);
+}
+
+.modal-header h4 {
+    margin: 0;
+    font-family: 'Open Sans', sans-serif;
+    color: var(--color-medium-gray);
+    font-weight: 400;
+}
+
+.modal-bio p strong {
+    display: inline-block; /* Permite que a margem seja aplicada */
+    margin-top: 20px;     /* Cria o espaço acima do título da lista */
+}
+
+/* Espaçamento entre a LISTA e o parágrafo de CONCLUSÃO */
+.modal-bio ul {
+    margin-bottom: 20px; /* Adiciona espaço ABAIXO da lista */
+}
+
+/* Espaçamento entre a BIO inteira e a seção de CONTATOS */
+.modal-bio {
+    margin-bottom: 25px; /* Adiciona espaço ABAIXO de todo o bloco da bio */
+}
+
+@keyframes fadeIn { from {opacity: 0; transform: scale(0.9);} to {opacity: 1; transform: scale(1);} }
+.close-button {
+    color: #aaa;
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+.close-button:hover { color: black; }
+
+#modal-body { text-align: left; }
+#modal-body img { float: left; margin-right: 20px; border-radius: 50%; width: 100px; height: 100px; }
+#modal-body h3 { margin-top: 0; color: var(--color-primary); }
+
+
+.terms-link {
+    font-size: 0.9rem;
+    text-align: center;
+    margin: -20px 0 40px 0;
+}
+.terms-link a {
+    color: var(--color-medium-gray);
+    text-decoration: underline;
+}
+
+/*
+=================================
+PÁGINA CADASTRO DE CURRÍCULO
+=================================
+*/
+
+/* --- Base do Formulário --- */
+#form-curriculo-section {
+    background-color: var(--color-light-gray);
+    padding: 80px 20px;
+}
+.form-container {
+    max-width: 800px; /* Um pouco mais de espaço */
+    margin: 0 auto;
+    padding: 40px;
+    background-color: var(--color-white);
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: center;
+}
+.form-container h2 { color: var(--color-primary); }
+.form-container p { color: var(--color-medium-gray); margin-bottom: 40px; }
+
+/* --- Fieldsets e Legendas --- */
+.curriculo-form fieldset {
+    border: none; /* Remove a borda padrão */
+    border-top: 1px solid #ddd; /* Usa uma linha superior como separador */
+    border-radius: 0; /* Remove o radius que não faz mais sentido */
+    padding: 30px 0;
+    margin-bottom: 20px;
+    text-align: left;
+    display: grid; /* ESSENCIAL: Organiza os campos internos */
+    gap: 20px; /* Espaçamento padrão entre os campos */
+}
+.curriculo-form legend {
+    padding: 0 10px;
+    margin-left: -10px; /* Alinha a legenda com o conteúdo */
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    color: var(--color-primary);
+    font-size: 1.5rem;
+}
+
+/* --- Campos (Inputs, Textareas, etc) - A PARTE MAIS IMPORTANTE QUE FALTAVA --- */
+.curriculo-form input,
+.curriculo-form select,
+.curriculo-form textarea {
+    width: 100%;
+    padding: 12px 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.curriculo-form input:focus,
+.curriculo-form select:focus,
+.curriculo-form textarea:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1); /* Efeito de anel ao focar */
+    outline: none;
+}
+
+/* --- Layouts de Grid --- */
+.grid-2-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* --- Botão de Envio Principal --- */
+.curriculo-form .btn-primary {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.2rem;
+}
+
+
+/* --- Estilos para as Partes Dinâmicas (que você já tinha, mas revisados) --- */
+.btn-add {
+    display: inline-block;
+    background-color: #f4f4f4;
+    color: var(--color-primary);
+    border: 1px dashed var(--color-primary);
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 10px;
+    font-weight: bold;
+    justify-self: start; /* Alinha o botão à esquerda */
+}
+.btn-add:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+.dynamic-item {
+    background-color: #fdfdfd;
+    border: 1px solid #eee;
+    border-left: 3px solid var(--color-primary); /* Destaque na esquerda */
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 15px;
+    position: relative;
+    display: grid;
+    gap: 15px;
+}
+.btn-remove {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #fbebeb;
+    color: #c53030;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    line-height: 25px;
+    text-align: center;
+}
+.btn-remove:hover {
+    background-color: #c53030;
+    color: white;
+}
+
+/* Estilos para o Resumo do Consentimento */
+.consent-summary {
+    font-size: 0.95rem;
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    color: var(--color-medium-gray);
+}
+.consent-summary p {
+    font-weight: bold;
+    color: var(--color-dark-gray);
+
+}
+.consent-summary ul {
+    list-style-position: inside;
+    padding-left: 10px;
+    margin-top: 10px;
+}
+.consent-summary li {
+    margin-bottom: 5px;
+}
+
+/* Ajuste para o seu .terms-acceptance, que agora é .form-consent */
+.form-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: var(--color-medium-gray);
+}
+.form-consent input[type="checkbox"] {
+    width: auto;
+    margin-top: 3px;
+    flex-shrink: 0; /* Impede que o checkbox encolha */
+}
+.form-consent a {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+/*
+=================================
+PÁGINA PÚBLICA DO BLOG
+=================================
+*/
+
+/* --- Layout da Listagem do Blog --- */
+.blog-list-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.blog-grid-public {
+    display: grid;
+    gap: 40px;
+    padding: 40px 0;
+    /* Por padrão (mobile), temos uma única coluna */
+    grid-template-columns: 1fr;
+}
+
+/* Para telas maiores que 600px (tablets), usamos 2 colunas */
+@media (min-width: 600px) {
+    .blog-grid-public {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Para telas maiores que 992px (desktops), usamos 3 colunas */
+@media (min-width: 992px) {
+    .blog-grid-public {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* --- Card de Post (Versão Pública) --- */
+.blog-card-public {
+    background-color: var(--color-white);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-card-public:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.blog-card-public .card-image-link img {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    transition: opacity 0.3s ease;
+}
+
+.blog-card-public .card-image-link:hover img {
+    opacity: 0.9;
+}
+
+.blog-card-public .card-content {
+    padding: 25px;
+    flex-grow: 1; /* Faz o conteúdo ocupar o espaço restante */
+    display: flex;
+    flex-direction: column;
+}
+
+.blog-card-public .post-meta {
+    font-size: 0.85rem;
+    color: var(--color-medium-gray);
+    margin-bottom: 10px;
+}
+
+.blog-card-public .post-title a {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    text-decoration: none;
+    line-height: 1.3;
+}
+
+.blog-card-public .post-title a:hover {
+    color: var(--color-secondary);
+}
+
+.blog-card-public .post-excerpt {
+    color: var(--color-dark-gray);
+    margin-top: 15px;
+    flex-grow: 1; /* Empurra o link "Leia Mais" para baixo */
+}
+
+.blog-card-public .read-more-link {
+    margin-top: 20px;
+    font-weight: bold;
+    color: var(--color-primary);
+    text-decoration: none;
+    align-self: flex-start; /* Alinha o link à esquerda */
+}
+
+.blog-card-public .read-more-link:hover {
+    color: var(--color-secondary);
+    text-decoration: underline;
+}
+
+
+/* --- Layout do Post Individual --- */
+.blog-post-container {
+    max-width: 800px;
+    margin: 60px auto;
+    padding: 20px;
+    background-color: #fff;
+}
+
+.post-full .post-header {
+    text-align: center;
+    margin-bottom: 40px;
+
+}
+.post-full .post-header h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+}
+.post-full .post-header .post-meta {
+    color: var(--color-medium-gray);
+    margin-top: 15px;
+}
+
+.post-full .post-featured-image {
+    margin: 0 0 40px 0;
+}
+.post-full .post-featured-image img {
+    width: 100%;
+    border-radius: 8px;
+}
+
+/* Estilo do conteúdo vindo do TinyMCE */
+.post-full .post-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--color-dark-gray);
+}
+.post-full .post-content h2,
+.post-full .post-content h3 {
+    margin-top: 2em;
+    margin-bottom: 1em;
+}
+.post-full .post-content p {
+    margin-bottom: 1.5em;
+}
+.post-full .post-content a {
+    color: var(--color-primary);
+    text-decoration: underline;
+}
+.post-full .post-content ul,
+.post-full .post-content ol {
+    margin-left: 2em;
+    margin-bottom: 1.5em;
+}
+.post-full .post-content blockquote {
+    border-left: 4px solid var(--color-secondary);
+    padding-left: 1.5em;
+    margin: 2em 0;
+    font-style: italic;
+    color: var(--color-medium-gray);
+}
+
+.post-full .post-footer {
+    text-align: center;
+    margin-top: 50px;
+    padding-top: 30px;
+    border-top: 1px solid #eee;
+}
+
+/*
+=================================
+ESTILOS DA PAGINAÇÃO
+=================================
+*/
+.pagination-nav {
+    margin-top: 60px;
+    display: flex;
+    justify-content: center;
+}
+
+.pagination {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    gap: 8px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+    overflow: hidden; /* Garante que as bordas arredondadas funcionem */
+}
+
+.page-item {
+    margin: 0;
+}
+
+.page-link {
+    display: block;
+    padding: 10px 18px;
+    background-color: var(--color-white);
+    color: var(--color-primary);
+    border: 1px solid var(--color-light-gray);
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.page-item:not(.disabled) .page-link:hover {
+    background-color: #f4f4f4;
+    color: var(--color-secondary);
+}
+
+/* Estilo para a página atual (ativa) */
+.page-item.active .page-link {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    border-color: var(--color-primary);
+    cursor: default;
+}
+
+/* Estilo para links desativados (primeira/última página) */
+.page-item.disabled .page-link {
+    color: #aaa;
+    background-color: #f9f9f9;
+    pointer-events: none; /* Impede o clique */
+}
+
+/* Arredondamento das bordas nas pontas */
+.page-item:first-child .page-link {
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+}
+.page-item:last-child .page-link {
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+/* Estilo do botão Hambúrguer */
+#hamburger-btn {
+    display: none; /* Escondido por padrão em telas grandes */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 1001; /* Garante que fique acima de outros elementos do header */
+}
+
+#hamburger-btn span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: var(--color-primary);
+    margin: 5px 0;
+    transition: all 0.3s ease-in-out;
+}
+
+/* Animação para o "X" quando o menu está aberto */
+#hamburger-btn.open span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+#hamburger-btn.open span:nth-child(2) {
+    opacity: 0;
+}
+#hamburger-btn.open span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Media Query para telas menores (onde a mágica acontece) */
+@media (max-width: 992px) { /* Você pode ajustar este valor se precisar */
+    
+    /* Mostra o botão hambúrguer */
+    #hamburger-btn {
+        display: block;
+    }
+
+    /* Esconde o menu de navegação desktop */
+    header nav {
+    justify-content: space-between;
+    }
+
+    header nav ul {
+        display: none; /* Esconde a lista */
+        position: absolute;
+        top: 100%; /* Posiciona logo abaixo do header */
+        left: 0;
+        width: 100%;
+        background-color: var(--color-white);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        flex-direction: column;
+        padding: 20px 0;
+    }
+
+    /* Regra para MOSTRAR o menu quando ele tiver a classe .open */
+    header nav ul.open {
+        display: flex;
+    }
+
+    header nav ul li {
+        margin: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    header nav ul li a {
+        padding: 15px 0;
+        display: block; /* Faz o link ocupar toda a largura do li */
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) { /* Você pode ajustar este valor se precisar */
+    
+    /* Mostra o botão hambúrguer */
+    #hamburger-btn {
+        display: block;
+    }
+
+    /* Esconde o menu de navegação desktop */
+    header nav {
+    justify-content: space-between;
+    }
+}
+
+@media (max-width: 468px) { /* Você pode ajustar este valor se precisar */
+    
+    /* Mostra o botão hambúrguer */
+    #hamburger-btn {
+        display: flex;
+    }
+
+    /* Esconde o menu de navegação desktop */
+    header nav {
+    justify-content: space-between;
+    }
+}
+
+/*
+=================================
+PÁGINA DE SERVIÇOS
+=================================
+*/
+#servicos-header {
+    text-align: center;
+    padding: 80px 20px;
+    background-color: var(--color-white);
+}
+#servicos-header h1 {
+    font-size: 3rem;
+    color: var(--color-primary);
+    max-width: 800px;
+    margin: 0 auto 20px auto;
+}
+#servicos-header p {
+    font-size: 1.2rem;
+    color: var(--color-medium-gray);
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+#servicos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+    padding: 80px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--color-light-gray);
+}
+.servico-card {
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.servico-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+.servico-card i {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-bottom: 20px;
+}
+.servico-card h3 {
+    color: var(--color-dark-gray);
+    font-size: 1.4rem;
+    margin-bottom: 10px;
+}
+.servico-card p {
+    color: var(--color-medium-gray);
+    flex-grow: 1; /* Empurra os detalhes para a base */
+    margin-bottom: 20px;
+}
+.servico-detalhes {
+    font-size: 0.9rem;
+    color: var(--color-medium-gray);
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+}
+.servico-detalhes strong {
+    color: var(--color-primary);
+}
+
+#cta-final-servicos {
+    text-align: center;
+    padding: 80px 20px;
+    background-color: var(--color-secondary);
+}
+#cta-final-servicos h2 {
+    color: var(--color-primary);
+    margin-bottom: 30px;
+}
+
+/*
+=================================
+PÁGINA SOBRE
+=================================
+*/
+#sobre-header {
+    text-align: center;
+    padding: 80px 20px;
+    background-color: var(--color-light-gray);
+}
+#sobre-header h1 { font-size: 3rem; color: var(--color-primary); }
+#sobre-header p { font-size: 1.2rem; color: var(--color-medium-gray); }
+
+/* Layout Padrão das Seções */
+#sobre-honoriel, #sobre-fundadora {
+    padding: 80px 20px;
+    background-color: var(--color-white);
+}
+.sobre-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 50px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.sobre-wrapper.reverse { flex-direction: row-reverse; }
+.sobre-text { flex: 1.5; text-align: left; }
+.sobre-text h2 { font-size: 2.5rem; }
+.sobre-text h3 { font-family: 'Open Sans', sans-serif; font-weight: 700; color: var(--color-dark-gray); margin-bottom: 15px; }
+.sobre-text p { margin-bottom: 15px; line-height: 1.7; color: var(--color-medium-gray); }
+.sobre-text .highlight {
+    background-color: #fffaf0;
+    padding: 15px;
+    border-left: 4px solid var(--color-secondary);
+    font-style: italic;
+    color: var(--color-dark-gray);
+}
+.sobre-img {
+    flex: 1;
+    max-width: 250px;
+}
+.sobre-img img { border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
+
+#sobre-fundadora .sobre-img img {
+    border-radius: 150px;
+    transform: scaleX(-1); /* Faz o flip horizontal */
+}
+
+/* Seção M/V/V */
+#sobre-mvv {
+    padding: 80px 20px;
+    background-color: var(--color-light-gray);
+}
+.mvv-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.mvv-card {
+    background-color: var(--color-white);
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+}
+.mvv-card h3 { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.mvv-card i { font-size: 1.5rem; }
+.mvv-card p { color: var(--color-medium-gray); }
+
+/* Seção Fundadora com fundo diferente */
+#sobre-fundadora { background-color: var(--color-white); }
+
+/* Seção Manifesto */
+#sobre-manifesto {
+    padding: 80px 20px;
+    background-color: var(--color-light-gray);
+    text-align: center;
+}
+.manifesto-completo { max-width: 800px; margin: 0 auto; }
+.manifesto-completo h2 { color: var(--color-primary); }
+.manifesto-completo p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--color-dark-gray);
+    margin-bottom: 25px;
+    line-height: 1.6;
+}
+
+/* Responsividade para a Página Sobre */
+@media (max-width: 900px) {
+    .sobre-wrapper {
+        flex-direction: column !important; /* Força a coluna em telas pequenas */
+        text-align: center;
+    }
+    .sobre-text { text-align: center; }
+}
+
+
+/*
+=================================
+PÁGINA DE CONTATO (VERSÃO FINAL E CORRETA COM GRID)
+=================================
+*/
+#contato-section {
+    padding: 80px 20px;
+    background-color: var(--color-light-gray);
+}
+
+.contato-header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px auto;
+}
+
+.contato-header h1 {
+    color: var(--color-primary);
+    font-size: 3rem;
+}
+
+.contato-header p {
+    color: var(--color-medium-gray);
+    font-size: 1.2rem;
+}
+
+/* --- Container Principal com GRID --- */
+.contato-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    background-color: var(--color-white);
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+
+    display: grid;
+    grid-template-columns: 40% 1fr; /* Coluna da imagem: 40%, Coluna do form: o resto (1fr) */
+    align-items:start;
+    gap: 50px;
+}
+
+/* --- Imagem de Fundo (que agora é a primeira coluna do grid) --- */
+.contato-wrapper::before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    min-height: 300px; /* Garante uma altura mínima para a imagem */
+    background-image: url('../images/anjo_honoriel.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:cover;
+    opacity: 0.25;
+}
+
+/* --- Container do Formulário (que agora é a segunda coluna do grid) --- */
+.contato-form-container h2 {
+    text-align: center;
+    color: var(--color-primary);
+    margin-bottom: 30px;
+}
+
+.contato-form {
+    display: grid;
+    gap: 20px;
+}
+
+.contato-form input,
+.contato-form select,
+.contato-form textarea {
+    width: 100%;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+}
+
+.contato-form input:focus,
+.contato-form select:focus,
+.contato-form textarea:focus {
+    border-color: var(--color-primary);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
+}
+
+.contato-form button {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+}
+
+/* --- Responsividade --- */
+@media (max-width: 900px) {
+    .contato-wrapper {
+        grid-template-columns: 1fr; /* Muda para uma única coluna */
+        gap: 0;
+        padding: 30px;
+    }
+    .contato-wrapper::before {
+        display: none; /* Esconde a imagem de fundo em telas menores */
+    }
+}
+
+/*
+=================================
+ESTILOS PARA MENSAGENS FLASH
+=================================
+*/
+.flash-messages-container {
+    padding: 0 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.flash-message {
+    padding: 20px;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    border-left: 5px solid;
+}
+
+/* Estilo para a categoria 'success' */
+.flash-success {
+    background-color: #e8f5e9; /* Fundo verde claro */
+    color: #1b5e20; /* Texto verde escuro */
+    border-left-color: #4caf50; /* Borda lateral verde */
+}
+
+/* (Opcional) Você pode adicionar estilos para outras categorias no futuro */
+.flash-error {
+    background-color: #ffebee; /* Fundo vermelho claro */
+    color: #b71c1c; /* Texto vermelho escuro */
+    border-left-color: #f44336; /* Borda lateral vermelha */
+}
+
+.close-flash {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: inherit; /* Herda a cor do texto (verde ou vermelho) */
+    opacity: 0.5;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+}
+.close-flash:hover {
+    opacity: 1;
+}

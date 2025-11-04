@@ -1,0 +1,221 @@
+{% extends "base.html" %}
+
+{% block title %}Para Empresas - Honoriel Soluções{% endblock %}
+
+{% block content %}
+<!-- Hero Section - Empresas -->
+<section id="hero-empresas">
+  <div class="hero-content">
+    <h1>A Solução Estratégica para a Gestão de Pessoas da sua Empresa</h1>
+    <p>Mais do que preencher vagas, construímos equipes de alta performance que impulsionam o crescimento do seu
+      negócio.</p>
+    <a href="#cta-final-empresas" class="btn btn-primary">Fale com um Consultor</a>
+  </div>
+</section>
+
+<!-- Seção "Resultados que Você Pode Esperar" -->
+<section id="resultados-esperados">
+  <h2>Resultados que Você Pode Esperar</h2>
+  <div class="resultados-grid">
+    <div class="resultado-card">
+      <i class="fa-solid fa-user-check"></i>
+      <h3>Contratações Assertivas que Ficam</h3>
+      <p>Vá além do currículo para encontrar talentos com fit cultural perfeito, reduzindo o turnover e fortalecendo
+        a equipe.</p>
+    </div>
+    <div class="resultado-card">
+      <i class="fa-solid fa-users-gear"></i>
+      <h3>Equipes Mais Engajadas e Produtivas</h3>
+      <p>Através de um diagnóstico preciso e planos de desenvolvimento, conectamos seu time com um motor para a
+        produtividade e a inovação.</p>
+    </div>
+    <div class="resultado-card">
+      <i class="fa-solid fa-sitemap"></i>
+      <h3>Processos de RH Estruturados que Trazem Paz</h3>
+      <p>Organizarmos a casa para a gestão de pessoas deixar de ser um problema e se tornar o pilar estratégico para
+        focar no crescimento do negócio.</p>
+    </div>
+  </div>
+  <div>
+    <a href="{{ url_for('servicos') }}" class="btn btn-primary">Conheça Todas as Soluções</a>
+  </div>
+</section>
+
+<!-- Seção "Gerando Confiança" -->
+<section id="gerando-confianca">
+  <h2>Gerando Confiança</h2>
+  <p class="intro-text">"Resultados não são apenas números. São histórias de confiança, parceria e transformação."
+  </p>
+
+  <div class="testimonials-grid">
+    <!-- Card 1 -->
+    <div class="testimonial-card">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <p class="main-quote">"Fiquei impressionada com a competência, o cuidado, o carinho e principalmente pelos
+        feedbacks rápidos."</p>
+      <p class="full-text">Passando para agradecer pelo excelente trabalho... Desde o 1º contato que tive com vc já
+        vi que seria sucesso! Agradeço e espero continuarmos nossa parceria...</p>
+      <div class="author-info">
+        <span class="company">AUDITEC CONTABILIDADE</span>
+        <span class="person">EMPRESÁRIA BELLY - PALMAS/TO</span>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="testimonial-card">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <p class="main-quote">"Ela não apenas encontra candidatos qualificados, mas pessoas que realmente fazem a
+        diferença no ambiente de trabalho."</p>
+      <p class="full-text">O processo conduzido por Renata economizou tempo, energia e recursos... Sua capacidade de
+        entender as necessidades da empresa e encontrar a candidata ideal foi impressionante. Recomendo
+        enfaticamente...
+      </p>
+      <div class="author-info">
+        <span class="company">DOUTOR SM CONTABILIDADE</span>
+        <span class="person">EMPRESÁRIO EDMILSON - CABO FRIO/RJ</span>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="testimonial-card">
+      <i class="fa-solid fa-quote-left quote-icon"></i>
+      <p class="main-quote">"Sua disponibilidade e conhecimento foram fundamentais para que eu tomasse decisões com
+        mais
+        segurança e embasamento."</p>
+      <p class="full-text">Gostaria de registrar minha gratidão pelo apoio e clareza nas orientações sobre
+        contratação
+        ou a terceirização. Agradeço pela parceria e profissionalismo.</p>
+      <div class="author-info">
+        <span class="company">VELOS CONSULTORIA</span>
+        <span class="person">EMPRESÁRIA FÚLVIA - SOROCABA/SP</span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <p class="outro-text">"Essas parcerias de sucesso são construídas com escuta atenta e dedicação. A próxima
+      história de transformação pode ser a da sua empresa."</p>
+  </div>
+</section>
+
+<!-- Seção "Especialistas a Sua Disposição" -->
+<section id="especialistas">
+  <h2>Especialistas a Sua Disposição</h2>
+  <p>Conectamos sua empresa a uma rede de parceiros confiáveis em áreas essenciais para a saúde do seu negócio.</p>
+  <p class="terms-link">
+    <a href="{{ url_for('termos_parceiros') }}" target="_blank">
+      Leia os Termos de Isenção de Responsabilidade sobre nossos parceiros.
+    </a>
+  </p>
+
+  <div class="especialistas-grid">
+    {% for esp in especialistas %}
+    <button class="especialista-card" data-modal-target="#modal-especialista-{{ esp.id }}">
+      {# Usa a 'area' do especialista para pegar o ícone do dicionário 'area_icons' #}
+      <i class="{{ area_icons.get(esp.area, 'fa-solid fa-star') }}"></i>
+      <h3>{{ esp.titulo }}</h3>
+    </button>
+    {% endfor %}
+  </div>
+</section>
+
+
+<!-- Seção CTA Final com Formulário -->
+<section id="cta-final-empresas">
+  <h2>Pronto para Transformar sua Equipe?</h2>
+  <p>Deixe seu contato. Nossa equipe está pronta para entender seu desafio e propor a melhor solução.</p>
+  <form action="{{ url_for('contato_empresa') }}" method="POST" class="contact-form">
+    <input type="text" name="nome" placeholder="Nome Completo" required>
+    <input type="text" name="empresa" placeholder="Nome da Empresa" required>
+
+    <!-- Campo CNPJ/CPF Atualizado -->
+    <input type="text" id="cnpj_cpf" name="cnpj_cpf" placeholder="CNPJ / CPF" inputmode="numeric" required
+      minlength="14" maxlength="18">
+
+    <input type="email" name="email" placeholder="E-mail Corporativo" required>
+
+    <!-- Campo Telefone Atualizado -->
+    <input type="tel" class="phone-mask" name="telefone" placeholder="Telefone / WhatsApp" required>
+
+    <textarea name="mensagem" placeholder="Mensagem" rows="5" required></textarea>
+    <button type="submit" class="btn btn-primary">Solicitar Contato</button>
+  </form>
+</section>
+{% endblock %}
+
+<!-- Script para o Modal -->
+<script src="/static/js/main.js"></script>
+
+{% block modals %}
+<!-- Gera um modal escondido para CADA especialista -->
+{% for esp in especialistas %}
+<div id="modal-especialista-{{ esp.id }}" class="modal">
+  <div class="modal-content">
+    <span class="close-button">&times;</span>
+    <div class="modal-body">
+
+      <!-- ===== BLOCO DO HEADER (COM FOTO E TÍTULO) CORRIGIDO ===== -->
+      <div class="modal-header">
+        {% if esp.foto_path %}
+        <img src="{{ url_for('view_upload', filename=esp.foto_path) }}" alt="{{ esp.nome }}">
+        {% else %}
+        <!-- Placeholder caso não haja foto -->
+        <img src="https://via.placeholder.com/100x100.png?text={{ esp.nome[0] }}" alt="{{ esp.nome }}">
+        {% endif %}
+        <div class="modal-title">
+          <h3>{{ esp.nome }}</h3>
+          <h4>{{ esp.titulo }}</h4>
+        </div>
+      </div>
+
+      <!-- ===== BLOCO DA BIO (COM ÍCONES NA LISTA) CORRIGIDO ===== -->
+      <div class="modal-bio">
+        {% if esp.bio_intro %}<p>{{ esp.bio_intro }}</p>{% endif %}
+
+        {% if esp.bio_lista_titulo %}<p><strong>{{ esp.bio_lista_titulo }}</strong></p>{% endif %}
+
+        {% if esp.bio_lista_itens %}
+        <ul>
+          {# O loop agora inclui um ícone em cada item da lista #}
+          {% for item in esp.bio_lista_itens.split('\n') %}
+          {% if item.strip() %}
+          <li><i class="fa-solid fa-check-circle"></i> {{ item.strip() }}</li>
+          {% endif %}
+          {% endfor %}
+        </ul>
+        {% endif %}
+
+        {% if esp.bio_conclusao %}<p>{{ esp.bio_conclusao }}</p>{% endif %}
+      </div>
+
+      <!-- ===== BLOCO DOS CONTATOS (SEM ALTERAÇÃO, JÁ ESTAVA CORRETO) ===== -->
+      <div class="modal-footer-contato">
+        <div class="modal-contatos">
+          {% if esp.contato_whatsapp %}
+          <p><a
+              href="https://wa.me/55{{ esp.contato_whatsapp|replace(' ','')|replace('(','')|replace(')','')|replace('-','') }}"
+              target="_blank"><i class="fa-brands fa-whatsapp"></i> {{ esp.contato_whatsapp }}</a></p>
+          {% endif %}
+          {% if esp.contato_email %}
+          <p><a href="mailto:{{ esp.contato_email }}"><i class="fa-regular fa-envelope"></i> {{ esp.contato_email }}</a>
+          </p>
+          {% endif %}
+          {% if esp.contato_linkedin %}
+          <p><a href="{{ esp.contato_linkedin }}" target="_blank"><i class="fa-brands fa-linkedin"></i> Perfil no
+              LinkedIn</a></p>
+          {% endif %}
+          {% if esp.contato_instagram %}
+          <p><a href="https://www.instagram.com/{{ esp.contato_instagram }}" target="_blank"><i
+                class="fa-brands fa-instagram"></i> @{{ esp.contato_instagram }}</a></p>
+          {% endif %}
+          {% if esp.contato_extra %}
+          <p><i class="fa-solid fa-globe"></i> {{ esp.contato_extra }}</p>
+          {% endif %}
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endfor %}
+{% endblock %}

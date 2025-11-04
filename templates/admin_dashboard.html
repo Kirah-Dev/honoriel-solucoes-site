@@ -1,0 +1,92 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Painel Administrativo - Honoriel Soluções{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+  <h1>Painel Administrativo</h1>
+  <p id="p-header">Bem-vinda, Renata! Selecione uma área para gerenciar.</p>
+</div>
+
+<div class="dashboard-grid">
+  <!-- Card para Gerenciar Candidaturas -->
+  <a href="{{ url_for('admin_candidatos') }}" class="dashboard-card">
+    <div class="card-icon">
+      <i class="fa-solid fa-users"></i>
+    </div>
+    <div class="card-body">
+      <h2>Gestão de Candidaturas</h2>
+      <p>Visualizar, buscar e gerenciar todas as candidaturas recebidas.</p>
+    </div>
+  </a>
+
+  <!-- Card para Gerenciar o Blog -->
+  <a href="{{ url_for('admin_blog_list') }}" class="dashboard-card">
+    <div class="card-icon">
+      <i class="fa-solid fa-newspaper"></i>
+    </div>
+    <div class="card-body">
+      <h2>Gerenciar Blog</h2>
+      <p>Criar, editar e excluir posts do blog.</p>
+    </div>
+  </a>
+
+  <!-- ===== NOVO CARD PARA GERENCIAR ESPECIALISTAS ===== -->
+  <a href="{{ url_for('admin_especialistas_list') }}" class="dashboard-card">
+    <div class="card-icon"><i class="fa-solid fa-star"></i></div>
+    <div class="card-body">
+      <h2>Gerenciar Especialistas</h2>
+      <p>Adicionar, editar e remover os perfis de especialistas parceiros.</p>
+    </div>
+  </a>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+  }
+
+  .dashboard-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 25px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  }
+
+  .card-icon i {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    margin-top: 5px;
+  }
+
+  .card-body h2 {
+    margin: 0 0 10px 0;
+    font-size: 1.5rem;
+  }
+
+  .card-body p {
+    margin: 0;
+    color: #666;
+  }
+
+  .admin-header p {
+    margin: 50px;
+    text-align: center;
+  }
+</style>
+{% endblock %}

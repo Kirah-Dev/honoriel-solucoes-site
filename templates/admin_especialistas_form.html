@@ -1,0 +1,237 @@
+{% extends "admin_base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+  <h1>{{ title }}</h1>
+  <a href="{{ url_for('admin_especialistas_list') }}" class="btn btn-secondary">&larr; Voltar para a Lista</a>
+</div>
+
+<div class="form-container-admin">
+  <form method="POST" enctype="multipart/form-data">
+
+    <fieldset>
+      <legend>Informações Principais</legend>
+      <div class="form-group">
+        <label for="nome">Nome Completo</label>
+        <input type="text" id="nome" name="nome" class="form-control"
+          value="{{ especialista.nome if especialista else '' }}" required>
+      </div>
+
+      <div class="form-group">
+        <label for="titulo">Título (Ex: Consultora Trabalhista)</label>
+        <input type="text" id="titulo" name="titulo" class="form-control"
+          value="{{ especialista.titulo if especialista else '' }}" required>
+      </div>
+
+      <!-- ===== CAMPO DE SELEÇÃO DE ÁREA ===== -->
+      <div class="form-group">
+        <label for="area">Área do Especialista (Define o Ícone)</label>
+        <select id="area" name="area" class="form-control" required>
+          <option value="" disabled {% if not especialista %}selected{% endif %}>Selecione uma área...</option>
+          {% for key, value in areas.items() %}
+          <option value="{{ key }}" {% if especialista and especialista.area==key %}selected{% endif %}>
+            {{ value }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Biografia</legend>
+      <div class="form-group">
+        <label for="bio_intro">Parágrafo de Introdução</label>
+        <textarea id="bio_intro" name="bio_intro" class="form-control"
+          rows="2">{{ especialista.bio_intro if especialista else request.form.get('bio_intro', '') }}</textarea>
+      </div>
+      <div class="form-group">
+        <label for="bio_lista_titulo">Título da Lista (Ex: Nossa expertise elimina:)</label>
+        <input type="text" id="bio_lista_titulo" name="bio_lista_titulo" class="form-control"
+          value="{{ especialista.bio_lista_titulo if especialista else request.form.get('bio_lista_titulo', '') }}">
+      </div>
+      <div class="form-group">
+        <label for="bio_lista_itens">Itens da Lista (um item por linha)</label>
+        <textarea id="bio_lista_itens" name="bio_lista_itens" class="form-control"
+          rows="4">{{ especialista.bio_lista_itens if especialista else request.form.get('bio_lista_itens', '') }}</textarea>
+      </div>
+      <div class="form-group">
+        <label for="bio_conclusao">Parágrafo de Conclusão</label>
+        <textarea id="bio_conclusao" name="bio_conclusao" class="form-control"
+          rows="2">{{ especialista.bio_conclusao if especialista else request.form.get('bio_conclusao', '') }}</textarea>
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Contatos</legend>
+      <div class="form-group">
+        <label for="contato_whatsapp">WhatsApp</label>
+        <input type="text" id="contato_whatsapp" name="contato_whatsapp" class="form-control"
+          value="{{ especialista.contato_whatsapp if especialista else request.form.get('contato_whatsapp', '') }}">
+      </div>
+      <div class="form-group">
+        <label for="contato_email">E-mail</label>
+        <input type="email" id="contato_email" name="contato_email" class="form-control"
+          value="{{ especialista.contato_email if especialista else request.form.get('contato_email', '') }}">
+      </div>
+      <div class="form-group">
+        <label for="contato_linkedin">URL do Perfil no LinkedIn</label>
+        <input type="url" id="contato_linkedin" name="contato_linkedin" class="form-control"
+          placeholder="https://www.linkedin.com/in/seu-perfil"
+          value="{{ especialista.contato_linkedin if especialista else '' }}">
+      </div>
+      <div class="form-group">
+        <label for="contato_instagram">Usuário do Instagram (sem o @)</label>
+        <input type="text" id="contato_instagram" name="contato_instagram" class="form-control"
+          placeholder="ex: honorielsolucoes" value="{{ especialista.contato_instagram if especialista else '' }}">
+      </div>
+      <div class="form-group">
+        <label for="contato_extra">Linha Extra (Ex: Atendimento a todo o Brasil)</label>
+        <input type="text" id="contato_extra" name="contato_extra" class="form-control"
+          value="{{ especialista.contato_extra if especialista else request.form.get('contato_extra', '') }}">
+      </div>
+    </fieldset>
+
+    <fieldset>
+      <legend>Configurações de Exibição</legend>
+      <div class="form-group-grid">
+        <div class="form-group">
+          <label for="foto">Foto do Perfil (JPG, PNG)</label>
+          <input type="file" id="foto" name="foto" class="form-control-file" accept="image/*">
+          {% if especialista and especialista.foto_path %}
+          <small>Arquivo atual: {{ especialista.foto_path }}. Enviar um novo arquivo irá substituí-lo.</small>
+          {% endif %}
+        </div>
+        <div class="form-group">
+          <label for="ordem">Ordem de Exibição</label>
+          <input type="number" id="ordem" name="ordem" class="form-control"
+            value="{{ especialista.ordem if especialista else '0' }}">
+          <small>Menores números aparecem primeiro.</small>
+        </div>
+      </div>
+      <div class="form-check">
+        <input type="checkbox" id="ativo" name="ativo" class="form-check-input" {% if (especialista and
+          especialista.ativo) or not especialista %}checked{% endif %}>
+        <label for="ativo">Exibir este especialista no site público</label>
+      </div>
+    </fieldset>
+
+    <div class="form-actions">
+      <button type="submit" class="btn btn-primary">Salvar Especialista</button>
+    </div>
+  </form>
+</div>
+{% endblock %}
+
+{% block styles %}
+<style>
+  .form-container-admin {
+    background-color: #fff;
+    padding: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  /* --- Estrutura de Fieldset --- */
+  fieldset {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 25px;
+    margin-bottom: 30px;
+  }
+
+  fieldset legend {
+    padding: 0 10px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: var(--color-primary);
+  }
+
+  /* --- Estrutura e Espaçamento dos Campos --- */
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group:last-child {
+    margin-bottom: 0;
+  }
+
+  .form-group label,
+  .form-check label {
+    display: block;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 8px;
+  }
+
+  /* --- Estilo dos Inputs, Textareas --- */
+  .form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .form-control:focus {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(139, 0, 0, 0.1);
+    outline: none;
+  }
+
+  /* --- Grid para campos lado a lado --- */
+  .form-group-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: end;
+  }
+
+  /* --- Estilo para Input de Arquivo --- */
+  .form-control-file {
+    font-size: 0.9rem;
+  }
+
+  /* --- Estilo para Checkbox --- */
+  .form-check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .form-check-input {
+    width: 1.2em;
+    height: 1.2em;
+    margin-top: -2px;
+  }
+
+  .form-check label {
+    margin-bottom: 0;
+    font-weight: normal;
+  }
+
+  /* --- Textos de Ajuda --- */
+  .form-group small {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85rem;
+    color: #666;
+  }
+
+  /* --- Botão de Ação --- */
+  .form-actions {
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 30px;
+  }
+
+  .form-actions .btn-primary {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1rem;
+  }
+</style>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends "admin_base.html" %}
+
+{% block title %}{{ 'Editar Post' if post else 'Criar Novo Post' }}{% endblock %}
+
+{% block styles %}
+<style>
+  /* Estilos que são APENAS para o formulário do blog */
+  .form-post {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-post label {
+    font-weight: bold;
+    font-size: 1.1em;
+  }
+
+  .form-post input,
+  .form-post textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+    font-family: inherit;
+  }
+
+  .form-actions {
+    display: flex;
+    gap: 15px;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+
+  .btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+  }
+
+  .btn-secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<h1>{{ 'Editar Post' if post else 'Criar Novo Post' }}</h1>
+<p>Preencha os campos abaixo para publicar um novo artigo no blog.</p>
+
+<form action="{{ url_for('admin_blog_editar', post_id=post.id) if post else url_for('admin_blog_novo') }}" method="POST"
+  class="form-post" enctype="multipart/form-data">
+  <div>
+    <label for="titulo">Título do Post</label>
+    <input type="text" id="titulo" name="titulo" value="{{ post.titulo if post else '' }}" required>
+  </div>
+
+  <div>
+    {% if post and post.imagem_destaque_path %}
+    <div
+      style="margin-bottom: 20px; padding: 15px; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px;">
+      <label style="font-weight: bold;">Imagem Atual:</label><br>
+      <img src="{{ url_for('view_upload', filename=post.imagem_destaque_path) }}" alt="Imagem de Destaque Atual"
+        style="max-width: 200px; height: auto; margin-top: 10px; border-radius: 5px; border: 1px solid #ddd; display: block;">
+      <p style="margin-top: 10px; font-size: 0.9em; color: #555;"><i class="fa-solid fa-file"
+          style="margin-right: 5px;"></i>{{ post.imagem_destaque_path }}</p>
+    </div>
+    {% endif %}
+    <label for="imagem_destaque">{{ 'Trocar Imagem de Destaque (opcional)' if post and post.imagem_destaque_path else
+      'Imagem de Destaque' }}</label>
+    <input type="file" id="imagem_destaque" name="imagem_destaque" accept="image/*">
+  </div>
+
+  <div>
+    <label for="conteudo">Conteúdo</label>
+    <textarea id="conteudo" name="conteudo">{{ post.conteudo if post else '' }}</textarea>
+  </div>
+  <div>
+    <label for="autor">Autor</label>
+    <input type="text" id="autor" name="autor" value="{{ post.autor if post else 'Equipe Honoriel' }}">
+  </div>
+
+  <div class="form-actions">
+    <a href="{{ url_for('admin_blog_list') }}" class="btn btn-secondary">Cancelar</a>
+    <button type="submit" class="btn btn-primary">{{ 'Salvar Alterações' if post else 'Publicar Post' }}</button>
+  </div>
+</form>
+{% endblock %}
+
+{% block scripts %}
+<!-- Scripts que são APENAS para esta página -->
+<script src="https://cdn.tiny.cloud/1/skfr47lynyrj8up8wxxfii6pp4ve1nky42o7uzi911yp244w/tinymce/6/tinymce.min.js"
+  referrerpolicy="origin"></script>
+<script>
+  tinymce.init({
+    selector: 'textarea#conteudo',
+    plugins: 'preview importcss searchreplace autolink autosave save directionality code visualblocks visualchars fullscreen image link media template codesample table charmap pagebreak nonbreaking anchor insertdatetime advlist lists wordcount help charmap quickbars emoticons',
+    menubar: 'file edit view insert format tools table help',
+    toolbar: 'undo redo | bold italic underline strikethrough | fontfamily fontsize blocks | alignleft aligncenter alignright alignjustify | outdent indent |  numlist bullist | forecolor backcolor removeformat | pagebreak | charmap emoticons | fullscreen  preview save print | insertfile image media link anchor codesample | ltr rtl',
+    height: 600,
+  });
+</script>
+{% endblock %}

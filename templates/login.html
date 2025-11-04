@@ -1,0 +1,130 @@
+{% block styles %}
+<style>
+  /* Estilos específicos para a página de login */
+  .login-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 80vh;
+    /* Ocupa a maior parte da altura da tela */
+  }
+
+  .form-container-login {
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .form-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  .form-header img {
+    width: 80px;
+    margin-bottom: 15px;
+  }
+
+  .form-header h2 {
+    margin: 0;
+    font-size: 1.8em;
+  }
+
+  .form-header p {
+    color: #666;
+    margin-top: 5px;
+  }
+
+  .login-form fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .login-form legend {
+    /* Oculta a legenda visualmente, mas mantém para leitores de tela */
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+  }
+
+  .form-control {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+  }
+
+  .form-actions {
+    text-align: center;
+    margin-top: 30px;
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
+    font-weight: bold;
+    background-color: #6C0B29;
+    /* Cor primária da Honoriel */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background-color: #560921;
+    /* Um tom mais escuro para o hover */
+  }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="login-section">
+  <div class="form-container-login">
+
+    <div class="form-header">
+      <img src="{{ url_for('static', filename='images/anjo_honoriel.png') }}" alt="Honoriel Logo">
+      <h2>Acesso ao Painel</h2>
+
+    </div>
+
+    <form method="POST" action="{{ url_for('login') }}" class="login-form">
+      <fieldset>
+        <legend>Credenciais de Acesso</legend>
+        <div class="form-group">
+          <label for="username">Usuário</label>
+          <input type="text" id="username" name="username" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Senha</label>
+          <input type="password" id="password" name="password" class="form-control" required>
+        </div>
+      </fieldset>
+
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Entrar</button>
+      </div>
+    </form>
+
+  </div>
+</section>
+{% endblock %}

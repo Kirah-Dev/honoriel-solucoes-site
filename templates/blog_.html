@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Blog - Honoriel Soluções</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+  <!-- Copie e cole seu <header> aqui para que a navegação funcione -->
+  <header>
+    <nav>
+      <div class="logo">
+        <img src="{{ url_for('static', filename='images/anjo_honoriel.png') }}" alt="Honoriel Soluções em RH">
+        <span>Honoriel</span>
+      </div>
+      <ul>
+        <li><a href="{{ url_for('home') }}">Home</a></li>
+        <li><a href="{{ url_for('candidatos') }}">Candidatos</a></li>
+        <li><a href="{{ url_for('empresas') }}">Empresas</a></li>
+        <li><a href="{{ url_for('servicos') }}">Serviços</a></li>
+        <li><a href="{{ url_for('sobre') }}">Sobre</a></li>
+        <li><a href="{{ url_for('blog') }}">Blog</a></li>
+        <li><a href="{{ url_for('contato') }}">Contato</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main style="padding: 40px; text-align: center;">
+    <h1>Nosso Blog</h1>
+    <p>Esta página está em construção.</p>
+  </main>
+
+  <!-- Footer - Rodapé do Site -->
+  <footer>
+    <div class="footer-content">
+      <!-- Coluna 1: Contatos -->
+      <div class="contact-info">
+        <h3>Contatos</h3>
+        <p><i class="fa-brands fa-whatsapp"></i> (22) 99736-0230</p>
+        <p><i class="fa-brands fa-instagram"></i> @honorielsolucoes</p>
+        <p><i class="fa-regular fa-envelope"></i> rhesolucoesconsultivas@gmail.com</p>
+        <p><i class="fa-solid fa-location-dot"></i> Atendimento 100% online a todo Brasil.</p>
+      </div>
+
+      <!-- Coluna 2: Links do Meio (NOVA ESTRUTURA) -->
+      <div class="footer-middle-column">
+        <div class="quick-links">
+          <h3>Consultas</h3>
+          <ul>
+            <li><a href="#"><i class="fa-solid fa-lock"></i> Política de Privacidade</a></li>
+          </ul>
+        </div>
+        <div class="quick-links">
+          <h3>Regras Básicas</h3>
+          <ul>
+            <li><a href="#"><i class="fa-regular fa-file-lines"></i> Código de Ética</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Coluna 3: Logo -->
+      <div class="footer-logo">
+        <img src="/static/images/logo_honoriel2.png" alt="Honoriel Soluções em RH">
+      </div>
+    </div>
+
+    <!-- Linha de Copyright (permanece igual) -->
+    <div class="footer-copyright">
+      <p>© 2025 Honoriel - Soluções em RH. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+</body>
+
+</html>

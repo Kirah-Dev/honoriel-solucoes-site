@@ -1,0 +1,84 @@
+{% extends "base.html" %}
+
+{% block title %}Sobre a Honoriel - Preparando o caminho para o extraordinário{% endblock %}
+
+{% block content %}
+<!-- Bloco de Abertura -->
+<section id="sobre-header">
+  <h1>Preparando o caminho para o extraordinário</h1>
+  <p>Uma consultoria criada para honrar o propósito de transformar vidas e organizações.</p>
+</section>
+
+<!-- Seção "Sobre a Honoriel" -->
+<section id="sobre-honoriel">
+  <div class="sobre-wrapper">
+    <div class="sobre-text">
+      <h2>Sobre a Honoriel</h2>
+      <p>A Honoriel Soluções em RH nasceu com um propósito maior: <strong>honrar a missão de cada empresa e o potencial
+          de cada pessoa.</strong> Somos uma consultoria de RH guiada por propósito, onde toda empresa carrega uma
+        essência, e cada pessoa possui um propósito divino.</p>
+      <p>Nossa missão é <strong>conectar esses dois mundos</strong>, unir talentos e organizações com sabedoria, fé e
+        excelência, gerando resultados reais e sustentáveis.</p>
+      <p class="highlight">"Honoriel" significa <strong>honra que vem de Deus</strong>. É o selo que guia cada ação,
+        cada processo e cada conquista que entregamos.</p>
+    </div>
+    <div class="sobre-img">
+      <img src="{{ url_for('static', filename='images/ft_renata_sit.png') }}" alt="Foto da fundadora da Honoriel">
+    </div>
+  </div>
+</section>
+
+<!-- Seção "Missão, Visão e Valores" -->
+<section id="sobre-mvv">
+  <div class="mvv-grid">
+    <div class="mvv-card">
+      <h3><i class="fa-regular fa-bullseye"></i> Missão</h3>
+      <p>Ser ponte e agente transformadora na gestão de pessoas das organizações, atuando com soluções personalizadas e
+        estratégicas que despertam o potencial e impulsionam resultados extraordinários.</p>
+    </div>
+    <div class="mvv-card">
+      <h3><i class="fa-regular fa-eye"></i> Visão</h3>
+      <p>Ser reconhecida como uma consultoria de referência nacional em transformação humana e organizacional, gerando
+        valor para líderes e empresários que buscam o caminho do extraordinário.</p>
+    </div>
+    <div class="mvv-card">
+      <h3><i class="fa-regular fa-gem"></i> Valor</h3>
+      <p><strong>Honra:</strong> agir com integridade e fé. <br><strong>Humanização:</strong> valorizar pessoas acima de
+        processos. <br><strong>Transformação:</strong> inovar com propósito e impacto positivo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Seção "Sobre a Fundadora" -->
+<section id="sobre-fundadora">
+  <div class="sobre-wrapper reverse">
+    <div class="sobre-text">
+      <h2>Sobre a Fundadora</h2>
+      <h3>Renata Ribeiro | Fundadora da Honoriel Soluções em RH</h3>
+      <p>Com formação em Técnico Contábil, Análise Comportamental DISC e Grafologia, minha trajetória foi construída com
+        propósito e dedicação, buscando sempre entender as necessidades das empresas e o potencial das pessoas dentro de
+        suas organizações.</p>
+      <p>A Honoriel nasceu para <strong>criar o novo</strong>. Com coragem, clareza, estrutura e transformação, acredito
+        que quando as pessoas certas estão nos lugares certos, o extraordinário acontece.</p>
+    </div>
+    <div class="sobre-img">
+      <img src="{{ url_for('static', filename='images/ft_renata3.jpg') }}"
+        alt="Retrato de Renata Ribeiro, fundadora da Honoriel">
+    </div>
+  </div>
+</section>
+
+<!-- Seção "Manifesto" -->
+<section id="sobre-manifesto">
+  <div class="manifesto-completo">
+    <h2>Nosso Manifesto</h2>
+    <p>"A Honoriel não nasceu para competir com o comum. Nasceu para <strong>criar o novo</strong>, guiada por
+      propósito.</p>
+    <p>Acreditamos que cada empresa pode ser um lugar de desenvolvimento humano e prosperidade. É aqui que os talentos
+      encontram oportunidades, onde as culturas florescem e os resultados são consequência de vidas transformadas.</p>
+    <p>Aqui, não entregamos apenas serviços. Entregamos <strong>transformação</strong>.</p>
+    <p>A <strong>honra que vem de Deus</strong> é o alicerce de todo resultado duradouro. E é com esse selo que seguimos
+      preparando o caminho para o extraordinário."</p>
+  </div>
+</section>
+{% endblock %}

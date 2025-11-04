@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block title %}{{ post.titulo }} - Honoriel Soluções{% endblock %}
+
+{% block content %}
+<section id="blog-post-main" style="padding: 60px 0; background-color: #f9f9f9;">
+  <div class="container blog-post-container">
+
+    <article class="post-full">
+      <header class="post-header">
+        <h1>{{ post.titulo }}</h1>
+        <p class="post-meta">
+          Publicado em {{ post.data_publicacao.strftime('%d de %B de %Y') }} por <strong>{{ post.autor }}</strong>
+        </p>
+      </header>
+
+      {% if post.imagem_destaque_path %}
+      <figure class="post-featured-image">
+        <img src="{{ url_for('view_upload', filename=post.imagem_destaque_path) }}"
+          alt="Imagem de destaque para {{ post.titulo }}">
+      </figure>
+      {% endif %}
+
+      <div class="post-content">
+        {{ post.conteudo | safe }}
+      </div>
+      <br><br><br>
+      <!-- ===== NOVO BLOCO DE ASSINATURA ===== -->
+      <div style="text-align: justify;">
+        <p><strong>Honoriel Soluções em RH | Cultivando culturas que refletem honra e
+            propósito</strong></p>
+        <p>Na Honoriel, acreditamos que a verdadeira força de uma organização nasce da honra, na forma como líderes
+          tratam pessoas,
+          conduzem decisões e constroem confiança.<br>
+          Promovemos processos estratégicos de desenvolvimento humano, liderança e cultura organizacional que unem
+          propósito,
+          coerência e fé, gerando resultados sustentáveis e relações saudáveis.</p><br>
+        <p>
+          <a href="mailto:fale@honoriel.com.br"><i class="fa-regular fa-envelope"></i> fale@honoriel.com.br</a>
+          <span class="separator">|</span>
+          <a href="{{ url_for('home') }}"><i class="fa-solid fa-globe"></i> www.honoriel.com.br</a>
+        </p><br>
+        <p>
+          💛 Transformando organizações através da cultura da honra.
+        </p>
+      </div>
+      <br><br>
+      <a href="{{ url_for('blog_list') }}" class="btn btn-secondary">&larr; Voltar para o Blog</a>
+
+
+    </article>
+  </div>
+</section>
+{% endblock %}

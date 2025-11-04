@@ -1,0 +1,171 @@
+{% extends "base.html" %}
+
+{% block title %}Cadastre seu currículo - Honoriel Soluções{% endblock %}
+
+{% block content %}
+<section id="form-curriculo-section">
+  <div class="form-container">
+    <h2>Construa seu Perfil Profissional</h2>
+    <p>Preencha os campos abaixo com atenção. Um perfil detalhado aumenta suas chances de encontrar a vaga ideal!
+    </p>
+
+    <form action="/cadastro-curriculo/" method="POST" enctype="multipart/form-data" class="curriculo-form">
+
+      <!-- ===== DADOS PESSOAIS ===== -->
+      <fieldset>
+        <legend>Dados Pessoais</legend>
+        <input type="text" name="nome_completo" placeholder="Nome Completo *" required>
+        <div class="grid-2-cols">
+          <input type="text" name="bairro" placeholder="Bairro *" required>
+          <input type="text" name="cidade" placeholder="Cidade *" required>
+        </div>
+        <div class="grid-2-cols">
+          <input type="text" name="uf" placeholder="UF *" required maxlength="2">
+          <input type="tel" class="phone-mask" name="telefone1" placeholder="Telefone (WhatsApp) *" required>
+        </div>
+        <div class="grid-2-cols">
+          <input type="email" name="email" placeholder="E-mail *" required>
+          <input type="url" name="linkedin_url" placeholder="URL do seu LinkedIn">
+        </div>
+      </fieldset>
+
+      <!-- ===== OBJETIVO E RESUMO ===== -->
+      <fieldset>
+        <legend>Objetivo e Resumo</legend>
+        <input type="text" name="objetivo" placeholder="Objetivo Profissional (Ex: Atuar na área de RH)">
+        <textarea name="resumo_profissional" rows="5"
+          placeholder="Resumo de suas qualificações e experiências..."></textarea>
+      </fieldset>
+
+      <!-- ===== FORMAÇÃO ACADÊMICA (DINÂMICO) ===== -->
+      <fieldset>
+        <legend>Formação Acadêmica</legend>
+        <div id="formacao-container">
+          <!-- Formações serão adicionadas aqui -->
+        </div>
+        <button type="button" class="btn-add" id="add-formacao">+ Adicionar Formação</button>
+      </fieldset>
+
+      <!-- ===== EXPERIÊNCIA PROFISSIONAL (DINÂMICO) ===== -->
+      <fieldset>
+        <legend>Experiência Profissional</legend>
+        <div id="experiencia-container">
+          <!-- Experiências serão adicionadas aqui -->
+        </div>
+        <button type="button" class="btn-add" id="add-experiencia">+ Adicionar Experiência</button>
+      </fieldset>
+
+      <!-- ===== COMPETÊNCIAS E IDIOMAS (DINÂMICO) ===== -->
+      <fieldset>
+        <legend>Competências e Idiomas</legend>
+        <textarea name="competencias_tecnicas" rows="4"
+          placeholder="Liste suas competências técnicas (Ex: Pacote Office, SAP, Power BI...)"></textarea>
+        <div id="idiomas-container">
+          <!-- Idiomas serão adicionados aqui -->
+        </div>
+        <button type="button" class="btn-add" id="add-idioma">+ Adicionar Idioma</button>
+      </fieldset>
+
+      <!-- ===== CURSOS COMPLEMENTARES (DINÂMICO) ===== -->
+      <fieldset>
+        <legend>Cursos Complementares</legend>
+        <div id="cursos-container">
+          <!-- Cursos serão adicionados aqui -->
+        </div>
+        <button type="button" class="btn-add" id="add-curso">+ Adicionar Curso</button>
+      </fieldset>
+
+      <!-- ===== UPLOAD DE CURRÍCULO ===== -->
+      <fieldset>
+        <legend>Anexar Currículo</legend>
+        <div class="file-upload-wrapper">
+          <label for="curriculo_pdf"><i class="fa-solid fa-cloud-arrow-up"></i> Anexar Currículo (PDF)</label>
+          <input type="file" id="curriculo_pdf" name="curriculo_pdf" accept=".pdf">
+          <span id="file-name">Opcional, caso já tenha preenchido os campos acima</span>
+        </div>
+      </fieldset>
+
+      <!-- Bloco de Consentimento e Termos (VERSÃO APRIMORADA) -->
+      <fieldset>
+        <legend>Consentimento e Termos</legend>
+
+        <div class="consent-summary">
+          <p>Ao enviar seu perfil, você confirma que as informações são verdadeiras e concorda que a Honoriel poderá:
+          </p>
+          <ul>
+            <li>Utilizar seus dados para processos seletivos e contato profissional.</li>
+            <li>Compartilhar seu perfil com empresas parceiras para vagas compatíveis.</li>
+            <li>Utilizar ferramentas para transcrição de entrevistas para fins de análise técnica.</li>
+          </ul>
+        </div>
+
+        <div class="form-consent">
+          <input type="checkbox" id="consent-checkbox" name="consent" required>
+          <label for="consent-checkbox">
+            Eu li, entendi e concordo com os pontos acima, com a
+            <a href="{{ url_for('politica_privacidade') }}" target="_blank">Política de Privacidade</a>
+            e com os <a href="{{ url_for('termos_de_uso') }}" target="_blank">Termos de Uso</a> do site.
+          </label>
+        </div>
+      </fieldset>
+
+
+      <button type="submit" class="btn btn-primary">Salvar e Enviar Perfil</button>
+    </form>
+  </div>
+</section>
+
+<!-- ===== TEMPLATES PARA AS SEÇÕES DINÂMICAS ===== -->
+<template id="template-formacao">
+  <div class="dynamic-item">
+    <button type="button" class="btn-remove">&times;</button>
+    <input type="text" name="form_curso[]" placeholder="Curso *" required>
+    <input type="text" name="form_instituicao[]" placeholder="Instituição *" required>
+    <div class="grid-2-cols">
+      <input type="text" name="form_ano_conclusao[]" placeholder="Ano de Conclusão">
+      <input type="text" name="form_conclusao_prevista[]" placeholder="Previsão de Conclusão">
+    </div>
+  </div>
+</template>
+
+<template id="template-experiencia">
+  <div class="dynamic-item">
+    <button type="button" class="btn-remove">&times;</button>
+    <input type="text" name="exp_empresa[]" placeholder="Empresa *" required>
+    <input type="text" name="exp_cargo[]" placeholder="Cargo *" required>
+    <div class="grid-2-cols">
+      <input type="text" name="exp_data_inicio[]" placeholder="Data de Início (Mês/Ano) *" required>
+      <input type="text" name="exp_data_fim[]" placeholder="Data de Fim (ou 'Atual') *" required>
+    </div>
+    <textarea name="exp_atividades[]" rows="4" placeholder="Principais atividades e resultados..."></textarea>
+  </div>
+</template>
+
+<template id="template-idioma">
+  <div class="dynamic-item">
+    <button type="button" class="btn-remove">&times;</button>
+    <div class="grid-2-cols">
+      <input type="text" name="idioma_nome[]" placeholder="Idioma (Ex: Inglês)" required>
+      <select name="idioma_nivel[]" required>
+        <option value="" disabled selected>Selecione o Nível</option>
+        <option value="basico">Básico</option>
+        <option value="intermediario">Intermediário</option>
+        <option value="avancado">Avançado</option>
+        <option value="fluente">Fluente</option>
+      </select>
+    </div>
+  </div>
+</template>
+
+<template id="template-curso">
+  <div class="dynamic-item">
+    <button type="button" class="btn-remove">&times;</button>
+    <input type="text" name="curso_nome[]" placeholder="Nome do Curso *" required>
+    <input type="text" name="curso_instituicao[]" placeholder="Instituição *" required>
+    <div class="grid-2-cols">
+      <input type="text" name="curso_carga_horaria[]" placeholder="Carga Horária">
+      <input type="text" name="curso_ano_conclusao[]" placeholder="Ano de Conclusão">
+    </div>
+  </div>
+</template>
+{% endblock %}

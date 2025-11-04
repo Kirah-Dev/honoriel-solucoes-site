@@ -1,0 +1,159 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Gerenciamento do Blog{% endblock %}
+
+{% block styles %}
+<style>
+  .admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .posts-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .posts-table th,
+  .posts-table td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+  }
+
+  .posts-table th {
+    background-color: #f2f2f2;
+  }
+
+  .action-link {
+    text-decoration: none;
+    color: #0056b3;
+    font-weight: bold;
+    margin-right: 15px;
+  }
+
+  .action-link.delete {
+    color: #dc3545;
+  }
+</style>
+{% endblock %}
+<!-- Usando os mesmos estilos da página de candidatos para consistência -->
+<style>
+  .admin-container {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 20px;
+  }
+
+  .admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .btn-primary {
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .posts-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+
+  .posts-table th,
+  .posts-table td {
+    border: 1px solid #ddd;
+    padding: 12px 15px;
+    text-align: left;
+  }
+
+  .posts-table th {
+    background-color: #f2f2f2;
+  }
+
+  .action-link {
+    text-decoration: none;
+    color: #0056b3;
+    font-weight: bold;
+    margin-right: 15px;
+  }
+
+  .action-link.delete {
+    color: #dc3545;
+  }
+</style>
+</head>
+
+<body>
+
+  {% block content %}
+  <div class="admin-header">
+    <h1>Gerenciamento de Blog</h1>
+    <a href="{{ url_for('admin_blog_novo') }}" class="btn-primary"><i class="fa-solid fa-plus"></i> Criar Novo Post</a>
+  </div>
+
+  <p>Abaixo está a lista de todos os artigos publicados no blog.</p>
+
+
+  <table class="posts-table">
+    <thead>
+      <tr>
+        <th>Título</th>
+        <th>Autor</th>
+        <th>Data de Publicação</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for post in posts %}
+      <tr>
+        <td>{{ post.titulo }}</td>
+        <td>{{ post.autor }}</td>
+        <td>{{ post.data_publicacao.strftime('%d/%m/%Y') }}</td>
+        <td>
+          <a href="{{ url_for('admin_blog_editar', post_id=post.id) }}" class="action-link">Editar</a>
+          <form action="{{ url_for('admin_blog_excluir', post_id=post.id) }}" method="POST" style="display: inline;"
+            onsubmit="return confirm('Você tem certeza que deseja excluir este post? Esta ação não pode ser desfeita.');">
+            <button type="submit" class="action-link delete"
+              style="background: none; border: none; padding: 0; cursor: pointer;">
+              Excluir
+            </button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="4" style="text-align: center;">Nenhum post publicado ainda.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <a href="{{ url_for('admin_dashboard') }}" style="display: inline-block; margin-top: 20px;">&larr; Voltar ao
+    Painel</a>
+  {% endblock %}
+  </div>
+
+</body>
+
+</html>

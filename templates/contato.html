@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}Vamos Conversar - Honoriel Soluções{% endblock %}
+
+{% block content %}
+<section id="contato-section">
+  <div class="contato-header">
+    <h1>Vamos Conversar?</h1>
+    <p>Estamos aqui para ouvir seu desafio, responder suas dúvidas ou explorar como podemos transformar sua organização.
+      Escolha a melhor forma de se conectar conosco abaixo.</p>
+  </div>
+
+  <div class="contato-wrapper">
+    <!-- Coluna da Marca d'Água -->
+
+
+    <!-- Coluna do Formulário -->
+    <div class="contato-form-container">
+      <h2>Envie sua Mensagem</h2>
+      <!-- A action aponta para a rota do backend que processará o formulário -->
+      <form action="{{ url_for('contato') }}" method="POST" class="contato-form">
+        <input type="text" name="nome" placeholder="Nome Completo" required>
+        <input type="email" name="email" placeholder="E-mail" required>
+        <input type="tel" class="phone-mask" name="telefone" placeholder="Telefone / WhatsApp" required>
+
+        <select name="assunto" required>
+          <option value="" disabled selected>Selecione o Assunto...</option>
+          <option value="duvida_servicos">Dúvidas sobre Serviços</option>
+          <option value="solicitar_proposta">Solicitar Proposta</option>
+          <option value="parcerias">Parcerias</option>
+          <option value="outros">Outros</option>
+        </select>
+
+        <textarea name="mensagem" placeholder="Sua mensagem" rows="6" required></textarea>
+
+        <button type="submit" class="btn btn-primary">Enviar Contato</button>
+      </form>
+    </div>
+  </div>
+</section>
+{% endblock %}

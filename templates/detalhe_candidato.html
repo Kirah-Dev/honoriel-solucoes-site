@@ -1,0 +1,277 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Perfil de {{ pessoa.nome_completo }}{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+  <h1>Perfil do Candidato</h1>
+  <a href="{{ url_for('admin_candidatos') }}" class="btn btn-secondary">&larr; Voltar para a Lista de Candidaturas</a>
+</div>
+
+<!-- ======================================================= -->
+<!-- CARD PRINCIPAL COM DADOS DA PESSOA E OBJETIVO RECENTE   -->
+<!-- ======================================================= -->
+<div class="detail-card">
+  <div class="card-header">
+    <div>
+      <h1>{{ pessoa.nome_completo }}</h1>
+      {# Exibe o Objetivo da candidatura mais recente #}
+      {% if candidatura_recente %}
+      <p class="objetivo"><strong>Objetivo Recente:</strong> {{ candidatura_recente.vaga_objetivo }}</p>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="contact-info">
+    <p><i class="fa-solid fa-envelope"></i> {{ pessoa.email }}</p>
+    <p><i class="fa-solid fa-phone"></i> {{ pessoa.telefone1 }}</p>
+    <p><i class="fa-solid fa-location-dot"></i> {{ pessoa.bairro }}, {{ pessoa.cidade }} - {{ pessoa.uf }}</p>
+    {% if pessoa.linkedin_url %}
+    <p><i class="fa-brands fa-linkedin"></i> <a href="{{ pessoa.linkedin_url }}" target="_blank">Acessar Perfil no
+        LinkedIn</a></p>
+    {% endif %}
+  </div>
+</div>
+
+<!-- ======================================================= -->
+<!-- CARD DE RESUMO PROFISSIONAL (DA CANDIDATURA MAIS RECENTE) -->
+<!-- ======================================================= -->
+<div class="detail-card">
+  <div class="section">
+    <h2><i class="fa-solid fa-user-tie"></i> Resumo da Candidatura Mais Recente</h2>
+    {# Exibe o Resumo da candidatura mais recente #}
+    <p class="item-description">{{ (candidatura_recente.resumo_profissional if candidatura_recente else '') or 'Nenhum
+      resumo informado para a última candidatura.' }}</p>
+  </div>
+</div>
+
+<!-- ======================================================= -->
+<!-- CARD DE COMPETÊNCIAS TÉCNICAS (DA PESSOA)               -->
+<!-- ======================================================= -->
+<div class="detail-card">
+  <div class="section">
+    <h2><i class="fa-solid fa-laptop-code"></i> Competências Técnicas</h2>
+    <p class="item-description">{{ pessoa.competencias_tecnicas or 'Nenhuma competência informada.' }}</p>
+  </div>
+</div>
+
+<!-- ======================================================= -->
+<!-- CARD DE FORMAÇÃO (DA PESSOA)                            -->
+<!-- ======================================================= -->
+<div class="detail-card">
+  <div class="section">
+    <h2><i class="fa-solid fa-graduation-cap"></i> Formação Acadêmica</h2>
+    {% for formacao in pessoa.formacoes %}
+    <div class="section-item">
+      <p class="item-title">{{ formacao.curso }}</p>
+      <p class="item-subtitle">{{ formacao.instituicao }}</p>
+      <p class="item-period">Conclusão: {{ formacao.ano_conclusao or formacao.conclusao_prevista }}</p>
+    </div>
+    {% else %}
+    <p class="no-data">Nenhuma formação cadastrada.</p>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- ======================================================= -->
+<!-- CARD DE EXPERIÊNCIA (DA PESSOA)                         -->
+<!-- ======================================================= -->
+<div class="detail-card">
+  <div class="section">
+    <h2><i class="fa-solid fa-briefcase"></i> Experiência Profissional</h2>
+    {% for exp in pessoa.experiencias %}
+    <div class="section-item">
+      <p class="item-title">{{ exp.cargo }}</p>
+      <p class="item-subtitle">{{ exp.empresa }}</p>
+      <p class="item-period">{{ exp.data_inicio }} — {{ exp.data_fim }}</p>
+      <p class="item-description">{{ exp.atividades | nl2br }}</p>
+    </div>
+    {% else %}
+    <p class="no-data">Nenhuma experiência cadastrada.</p>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- ======================================================= -->
+<!-- CARD DE IDIOMAS E CURSOS (DA PESSOA)                    -->
+<!-- ======================================================= -->
+<div class="detail-card">
+  <div class="section">
+    <h2><i class="fa-solid fa-language"></i> Idiomas</h2>
+    {% for idioma in pessoa.idiomas %}
+    <div class="section-item">
+      <p class="item-title">{{ idioma.nome }} - <span style="font-weight: normal; text-transform: capitalize;">{{
+          idioma.nivel }}</span></p>
+    </div>
+    {% else %}
+    <p class="no-data">Nenhum idioma cadastrado.</p>
+    {% endfor %}
+  </div>
+
+  <div class="section">
+    <h2><i class="fa-solid fa-award"></i> Cursos e Certificações</h2>
+    {% for curso in pessoa.cursos %}
+    <div class="section-item">
+      <p class="item-title">{{ curso.nome }}</p>
+      <p class="item-subtitle">{{ curso.instituicao }}</p>
+      <p class="item-period">Carga Horária: {{ curso.carga_horaria or 'N/A' }} | Conclusão: {{ curso.ano_conclusao or
+        'N/A' }}</p>
+    </div>
+    {% else %}
+    <p class="no-data">Nenhum curso cadastrado.</p>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- ======================================================= -->
+<!-- CARD COM O HISTÓRICO COMPLETO DE CANDIDATURAS           -->
+<!-- ======================================================= -->
+<div class="detail-card">
+  <div class="section">
+    <h2><i class="fa-solid fa-file-signature"></i> Histórico Completo de Candidaturas ({{ pessoa.candidaturas|length }})
+    </h2>
+    <div class="admin-table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Data</th>
+            <th>Vaga / Objetivo</th>
+            <th>Resumo da Candidatura</th>
+            <th>Currículo Anexado</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for candidatura in pessoa.candidaturas|sort(attribute='data_candidatura', reverse=True) %}
+          <tr>
+            <td>{{ candidatura.data_candidatura.strftime('%d/%m/%Y') }}</td>
+            <td><strong>{{ candidatura.vaga_objetivo }}</strong></td>
+            <td>{{ candidatura.resumo_profissional or 'Não informado' }}</td>
+            <td>
+              {% if candidatura.curriculo_pdf_path %}
+              <a href="{{ url_for('view_upload', filename=candidatura.curriculo_pdf_path) }}" target="_blank"
+                class="btn btn-sm btn-info">Ver PDF</a>
+              {% else %}
+              N/A
+              {% endif %}
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block styles %}
+<!-- Estilos específicos para esta página -->
+<style>
+  .objetivo {
+    font-size: 1.2rem;
+    color: #555;
+    font-style: italic;
+    margin-top: 10px;
+  }
+
+  .detail-card {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+  }
+
+  .card-header {
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+  }
+
+  .card-header h1 {
+    margin: 0;
+    color: #333;
+  }
+
+  .contact-info p {
+    margin: 8px 0;
+    color: #555;
+    display: flex;
+    /* Para alinhar ícone e texto */
+    align-items: center;
+  }
+
+  .contact-info i {
+    width: 20px;
+    text-align: center;
+    margin-right: 10px;
+    color: var(--color-primary);
+  }
+
+  .section h2 {
+    border-bottom: 2px solid var(--color-primary);
+    padding-bottom: 8px;
+    margin-bottom: 15px;
+    color: var(--color-primary);
+    font-size: 1.6em;
+  }
+
+  .section-item {
+    padding: 15px 0;
+    border-bottom: 1px solid #eee;
+  }
+
+  .section-item:last-child {
+    border-bottom: none;
+  }
+
+  .item-title {
+    font-weight: bold;
+  }
+
+  .item-subtitle {
+    color: #666;
+    margin-top: 4px;
+  }
+
+  .item-period {
+    font-style: italic;
+    color: #888;
+    font-size: 0.9em;
+    margin-top: 4px;
+  }
+
+  .item-description {
+    margin-top: 10px;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+
+  .no-data {
+    font-style: italic;
+    color: #888;
+  }
+
+  /* Tabela de histórico */
+  .admin-table-container {
+    margin-top: 20px;
+    overflow-x: auto;
+  }
+
+  .admin-table-container table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .admin-table-container th,
+  .admin-table-container td {
+    padding: 12px;
+    border: 1px solid #ddd;
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .admin-table-container th {
+    background-color: #f2f2f2;
+  }
+</style>
+{% endblock %}

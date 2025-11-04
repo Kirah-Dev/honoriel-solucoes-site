@@ -1,0 +1,192 @@
+{% extends "admin_base.html" %}
+
+{% block title %}Admin - Gestão de Candidaturas{% endblock %}
+
+{% block content %}
+<div class="admin-header">
+  <h1>Gestão de Candidaturas</h1>
+
+</div>
+
+<!-- Formulário de Busca Aprimorado -->
+<div class="search-container">
+  <form method="GET" action="{{ url_for('admin_candidatos') }}" class="admin-search-form">
+    <div class="search-field">
+      <label for="filtro_por">Buscar por</label>
+      <select name="filtro_por" id="filtro_por">
+        <option value="pessoa" {% if request.args.get('filtro_por')=='pessoa' %}selected{% endif %}>Nome / E-mail
+        </option>
+        <option value="candidatura" {% if request.args.get('filtro_por')=='candidatura' %}selected{% endif %}>Vaga
+          (Objetivo)</option>
+      </select>
+    </div>
+    <div class="search-field search-input-field">
+      <label for="termo_busca">Termo</label>
+      <input type="search" name="termo_busca" id="termo_busca" placeholder="Digite para buscar..."
+        value="{{ request.args.get('termo_busca', '') }}">
+    </div>
+    <div class="search-actions">
+      <button type="submit" class="btn btn-primary"><i class="fa-solid fa-magnifying-glass"></i> Buscar</button>
+      <a href="{{ url_for('admin_candidatos') }}" class="btn btn-secondary">Limpar</a>
+    </div>
+  </form>
+</div>
+
+<!-- Tabela de Resultados -->
+<div class="admin-table-container">
+  <table>
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Vaga / Objetivo</th>
+        <th>Nome do Candidato</th>
+        <th>E-mail</th>
+        <th class="actions-header">Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for candidatura in candidaturas %}
+      <tr>
+        <td>{{ candidatura.data_candidatura.strftime('%d/%m/%Y') }}</td>
+        <td><strong>{{ candidatura.vaga_objetivo }}</strong></td>
+        <td>{{ candidatura.pessoa.nome_completo }}</td>
+        <td>{{ candidatura.pessoa.email }}</td>
+        <td class="actions">
+          <a href="{{ url_for('detalhe_candidato', pessoa_id=candidatura.pessoa.id) }}" class="btn btn-sm btn-info">Ver
+            Perfil</a>
+          <form action="{{ url_for('excluir_candidatura', candidatura_id=candidatura.id) }}" method="POST"
+            onsubmit="return confirm('Tem certeza que deseja excluir esta candidatura específica?');">
+            <button type="submit" class="btn btn-sm btn-danger">Excluir</button>
+          </form>
+        </td>
+      </tr>
+      {% else %}
+      <tr>
+        <td colspan="5" style="text-align: center; padding: 30px;">Nenhuma candidatura encontrada.</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+<div><a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">&larr; Voltar ao Painel</a></div>
+{% endblock %}
+
+{% block styles %}
+<!-- Estilos específicos para esta página -->
+<style>
+  /* --- Formulário de Busca Aprimorado --- */
+  .search-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    margin-bottom: 30px;
+  }
+
+  .admin-header {
+    display: flex;
+    justify-content: space-between;
+    /* Empurra o título para a esquerda e o botão para a direita */
+    align-items: center;
+    /* Alinha verticalmente */
+    margin-bottom: 20px;
+    /* Mantém o espaçamento */
+    flex-wrap: wrap;
+    /* Permite quebrar a linha em telas pequenas */
+    gap: 20px;
+    /* Espaço entre os itens se eles quebrarem a linha */
+  }
+
+  .admin-search-form {
+    display: flex;
+    align-items: flex-end;
+    /* Alinha os itens na base */
+    gap: 20px;
+    flex-wrap: wrap;
+    /* Para responsividade */
+  }
+
+  .search-field {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .search-field label {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 5px;
+  }
+
+  .search-field select,
+  .search-field input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+
+  .search-input-field {
+    flex-grow: 1;
+    /* Faz o campo de texto ocupar o espaço extra */
+  }
+
+  .search-actions {
+    display: flex;
+    gap: 10px;
+  }
+
+  .search-actions .btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  /* --- Tabela de Resultados --- */
+  .admin-table-container {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    /* Para o radius funcionar com a tabela */
+    margin-bottom: 30px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  th,
+  td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+  }
+
+  th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: var(--color-dark-gray);
+  }
+
+  tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+
+  .actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .actions-header {
+    text-align: right;
+    padding-right: 150px;
+  }
+
+  .actions form {
+    margin: 0;
+  }
+</style>
+{% endblock %}
