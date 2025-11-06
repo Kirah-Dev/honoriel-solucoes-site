@@ -1,6 +1,6 @@
 # Honoriel Soluções - Site Institucional e Plataforma de RH
 
-![Honoriel Logo](backend/static/images/anjo_honoriel.png)
+![Honoriel Logo](static/images/anjo_honoriel.png)
 
 Repositório oficial do site institucional e sistema de gestão para a consultoria de RH **Honoriel Soluções**. Este é um projeto full-stack desenvolvido para fortalecer a presença online da empresa e otimizar seus processos de recrutamento e gerenciamento de conteúdo.
 
@@ -100,5 +100,3 @@ Repositório oficial do site institucional e sistema de gestão para a consultor
 
 O site estará disponível em `http://127.0.0.1:5000`.
 
----
-```    *   **Importante:** Na linha `![Honoriel Logo](...)`, eu apontei para o caminho relativo da imagem do anjo. O GitHub deve conseguir exibi-la. Na linha `git clone ...`, não se esqueça de substituir `seu-usuario/honoriel-solucoes-site.git` pela URL real do seu repositório.
