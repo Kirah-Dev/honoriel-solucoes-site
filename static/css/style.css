@@ -922,7 +922,7 @@ PÁGINA CANDIDATOS
 /* Hero Section - Candidatos */
 #hero-candidatos {
     background-color: var(--color-light-gray);
-    padding: 50px 200px;
+    padding: 80px 20px; /* Padding vertical maior, horizontal flexível */
     text-align: center;
     border-bottom: 1px solid var(--color-primary);
 }
@@ -976,19 +976,16 @@ PÁGINA CANDIDATOS
     background-color: var(--color-light-gray);
     border-bottom: 1px solid var(--color-primary);
     text-align: center;
-    padding-left: 50px ;
-    padding-bottom: 80px;
-    
+    padding: 80px 20px; /* Padding uniforme em cima/baixo e nos lados */
 }
 
 .manual-wrapper {
-    max-width: 1200px;
+    max-width: 1100px; /* Diminuído um pouco para dar mais respiro */
     margin: 0 auto;
-    padding: 0 50px;
+    padding: 0; /* Remove o padding interno, o pai já cuida disso */
     display: flex;
     align-items: center;
     gap: 50px;
-    
 }
 
 #manual-candidato .btn-primary {
@@ -1110,23 +1107,10 @@ PÁGINA CANDIDATOS
     height: 100px; /* Altura da trilha */
 }
 
-/* Responsividade */
-@media (max-width: 992px) {
-    .jornada-steps {
-        grid-template-columns: 1fr;
-        gap: 80px;
-    }
-    .jornada-path {
-        display: none;
-    }
-    .step-card {
-        margin: 0 auto;
-        max-width: 400px;
-    }
-}
 
-/* Responsividade */
+/* Responsividade para a Página Candidatos */
 @media (max-width: 992px) {
+
     .jornada-steps {
         grid-template-columns: 1fr; /* Empilha tudo em uma coluna */
         gap: 80px; /* Aumenta o espaço entre os cards */
@@ -1138,10 +1122,7 @@ PÁGINA CANDIDATOS
         margin: 0 auto;
         max-width: 400px; /* Limita a largura do card */
     }
-}
 
-/* Responsividade para a Página Candidatos */
-@media (max-width: 992px) {
     .manual-wrapper {
         flex-direction: column;
         text-align: center;
@@ -1160,6 +1141,41 @@ PÁGINA CANDIDATOS
         margin-bottom: 50px; /* Espaçamento entre os cards empilhados */
     }
 }
+
+/* Para telas de celular (como iPhone 12/13/14, 390px de largura) */
+@media (max-width: 480px) {
+
+    .manual-wrapper {
+        flex-direction: column;
+        text-align: center;
+    }
+    .manual-text {
+        text-align: center;
+    }
+    
+    /* --- AJUSTE NA HERO SECTION DA PÁGINA CANDIDATOS --- */
+    #hero-candidatos {
+        padding: 60px 20px; /* Menos espaçamento vertical em telas pequenas */
+    }
+    
+    #hero-candidatos h1 {
+        font-size: 2.2rem; /* Título menor para celular */
+        line-height: 1.3;
+    }
+
+    #hero-candidatos p {
+        font-size: 1.2rem; /* Parágrafo menor */
+        font-family: 'Open Sans', sans-serif; /* Usar Open Sans no parágrafo fica mais legível */
+        padding: 10px; /* Remove o padding grande */
+        margin-bottom: 30px;
+    }
+
+    #hero-candidatos .btn-primary {
+        width: 100%; /* Botão ocupa a largura toda no celular */
+        max-width: 300px; /* Mas não mais que 300px */
+    }
+}
+
 
 
 /*
@@ -1706,12 +1722,17 @@ PÁGINA PÚBLICA DO BLOG
     margin-bottom: 10px;
 }
 
+.post-title { /* Selecionando o h2 */
+    line-height: 1.2;
+    margin-bottom: 10px; 
+}
+
 .blog-card-public .post-title a {
     font-family: 'Playfair Display', serif;
     font-size: 1.4rem;
     color: var(--color-primary);
     text-decoration: none;
-    line-height: 1.3;
+    
 }
 
 .blog-card-public .post-title a:hover {
@@ -1747,21 +1768,24 @@ PÁGINA PÚBLICA DO BLOG
 }
 
 .post-full .post-header {
-    text-align: center;
+    text-align: justify;
     margin-bottom: 40px;
 
 }
 .post-full .post-header h1 {
     font-size: 3rem;
     line-height: 1.2;
+    text-align: justify;
+    margin-bottom: 10px;
 }
 .post-full .post-header .post-meta {
     color: var(--color-medium-gray);
-    margin-top: 15px;
+    margin-top: 20px;
 }
 
 .post-full .post-featured-image {
     margin: 0 0 40px 0;
+    
 }
 .post-full .post-featured-image img {
     width: 100%;
@@ -1781,6 +1805,7 @@ PÁGINA PÚBLICA DO BLOG
 }
 .post-full .post-content p {
     margin-bottom: 1.5em;
+    text-align: justify;
 }
 .post-full .post-content a {
     color: var(--color-primary);
