@@ -14,9 +14,11 @@ from flask_login import LoginManager, UserMixin, login_user, logout_user, login_
 from flask_bcrypt import Bcrypt
 import os
 
+# Carrega as variáveis do arquivo .env
 load_dotenv()
 
 # --- CRIAÇÃO DO FILTRO NL2BR (VERSÃO MODERNA) ---
+# # --- FILTRO JINJA2 ---
 _paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
 
 def nl2br(value):
@@ -25,6 +27,11 @@ def nl2br(value):
     # Converte quebras de linha duplas em parágrafos e simples em <br>
     result = u'\n\n'.join(f'<p>{p.replace(chr(10), "<br>\\n")}</p>' for p in _paragraph_re.split(escaped_value))
     return Markup(result)
+
+
+# =======================================================
+# CONFIGURAÇÃO DO APP E EXTENSÕES
+# =======================================================
 
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
 
@@ -64,10 +71,10 @@ def create_admin():
 # --- REGISTRA O FILTRO NO AMBIENTE JINJA2 ---
 app.jinja_env.filters['nl2br'] = nl2br
 
-# --- CONFIGURAÇÕES ---
+# --- CONFIGURAÇÕES GERAIS ---
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SECRET_KEY'] = '#Honoriel123456'
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY')
 UPLOAD_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'uploads')
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
@@ -79,12 +86,10 @@ ALLOWED_IMAGE_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp'}
 app.config['MAIL_SERVER'] = 'smtp.gmail.com'
 app.config['MAIL_PORT'] = 587
 app.config['MAIL_USE_TLS'] = True
-# Usa as variáveis de ambiente que carregamos do .env
 app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
 app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 
-# --- CONFIGURAÇÕES DO BD DOS ESPECIALISTAS - Dicionário que mapeia áreas a ícones.
-# A CHAVE é o que será salvo no banco, o VALOR é o nome amigável.
+# --- DICIONÁRIOS GLOBAIS ---
 ESPECIALISTA_AREAS = {
     'psicologia': 'Psicologia',
     'direito': 'Direito',
@@ -108,7 +113,7 @@ AREA_ICONS = {
     'outro': 'fa-solid fa-handshake' # Ícone padrão
 }
 
-
+# --- INICIALIZAÇÃO DAS EXTENSÕES ---
 db = SQLAlchemy(app)
 mail = Mail(app) # Inicializa a extensão Mail
 migrate = Migrate(app, db)
@@ -128,9 +133,8 @@ class Pessoa(db.Model):
     telefone1 = db.Column(db.String(20))
     email = db.Column(db.String(120), unique=True, nullable=False)
     linkedin_url = db.Column(db.String(200))
-    competencias_tecnicas = db.Column(db.Text)
     
-    # NOVOS E ANTIGOS RELACIONAMENTOS ATUALIZADOS
+    competencias_tecnicas = db.Column(db.Text)
     candidaturas = db.relationship('Candidatura', backref='pessoa', lazy=True, cascade="all, delete-orphan")
     formacoes = db.relationship('Formacao', backref='pessoa', lazy=True, cascade="all, delete-orphan")
     experiencias = db.relationship('Experiencia', backref='pessoa', lazy=True, cascade="all, delete-orphan")
@@ -141,7 +145,7 @@ class Candidatura(db.Model):
     __tablename__ = 'candidatura' # Nome da tabela no banco
     id = db.Column(db.Integer, primary_key=True)
     vaga_objetivo = db.Column(db.String(255), nullable=False)
-    resumo_profissional = db.Column(db.Text)
+    resumo_profissional = db.Column(db.Text, nullable=True)
     curriculo_pdf_path = db.Column(db.String(255))
     data_candidatura = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
     
@@ -190,33 +194,27 @@ class Post(db.Model):
     def __repr__(self):
         return f"Post('{self.titulo}', '{self.data_publicacao}')"
     
-# ===== NOVO MODELO PARA OS ESPECIALISTAS =====
 class Especialista(db.Model):
     __tablename__ = 'especialista'
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(150), nullable=False)
     titulo = db.Column(db.String(150), nullable=False)
-    foto_path = db.Column(db.String(255), nullable=True)
-    
+    foto_path = db.Column(db.String(255), nullable=True)    
     bio_intro = db.Column(db.Text, nullable=True)     # "Especialista em gestão..."
     bio_lista_titulo = db.Column(db.String(255), nullable=True) # "Nossa expertise elimina..."
     bio_lista_itens = db.Column(db.Text, nullable=True) # Os itens da lista, um por linha
     bio_conclusao = db.Column(db.Text, nullable=True) # "Oferecemos um serviço..."
-
     contato_whatsapp = db.Column(db.String(50), nullable=True)
     contato_email = db.Column(db.String(150), nullable=True)
     contato_linkedin = db.Column(db.String(255), nullable=True) # Para a URL completa
     contato_instagram = db.Column(db.String(100), nullable=True) # Apenas para o @usuario
     contato_extra = db.Column(db.String(150), nullable=True) # "Atendimento a todo o Brasil"
-
     ativo = db.Column(db.Boolean, default=True, nullable=False)
-    ordem = db.Column(db.Integer, default=0)
-    
+    ordem = db.Column(db.Integer, default=0)    
     area = db.Column(db.String(50), nullable=False, default='outro')
 
     def __repr__(self):
         return f'<Especialista {self.nome}>'
-# ============================================
 
 class User(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True)
@@ -229,7 +227,6 @@ class User(db.Model, UserMixin):
 
 
 # --- FUNÇÕES AUXILIARES ---
-# (Sem alterações aqui)
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
@@ -237,7 +234,9 @@ def allowed_image_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_IMAGE_EXTENSIONS
 
 
-# --- ROTAS PÚBLICAS ---
+# =======================================================
+# ROTAS PÚBLICAS
+# =======================================================
 @app.route('/')
 def home():
     # BUSCA OS 3 POSTS MAIS RECENTES
@@ -276,7 +275,7 @@ def contato_empresa():
             msg = Message(
                 subject=f"Novo Contato de Empresa: {empresa}",
                 sender=app.config['MAIL_USERNAME'],
-                recipients=['wellensouza@gmail.com'] # E-mail da Renata
+                recipients=[os.getenv('MAIL_RECIPIENT')] # E-mail destinatário
             )
 
             # Corpo do e-mail em formato HTML, com os campos corretos
@@ -312,6 +311,7 @@ def candidatos():
 @app.route('/cadastro-curriculo/', methods=['GET', 'POST'])
 def cadastro_curriculo():
     if request.method == 'POST':
+        
         # 1. Validação de consentimento
         if not request.form.get('consent'):
             flash('Você precisa ler e aceitar os termos para continuar.', 'danger')
@@ -319,117 +319,92 @@ def cadastro_curriculo():
 
         email_enviado = request.form.get('email')
         
-        try:
-            # 2. Procura pela Pessoa usando o e-mail
+            # 1. Encontra ou cria a instância da Pessoa
+        try:    
             pessoa = Pessoa.query.filter_by(email=email_enviado).first()
-            flash_message = ''
-
+            
             if pessoa:
-                # --- A: PESSOA JÁ EXISTE -> ATUALIZA O PERFIL ---
                 flash_message = 'Seu perfil foi atualizado e sua nova candidatura foi registrada com sucesso!'
-                
-                # Atualiza todos os dados fixos da Pessoa com as informações mais recentes do formulário
-                pessoa.nome_completo = request.form.get('nome_completo')
-                pessoa.bairro = request.form.get('bairro')
-                pessoa.cidade = request.form.get('cidade')
-                pessoa.uf = request.form.get('uf')
-                pessoa.telefone1 = request.form.get('telefone1')
-                pessoa.linkedin_url = request.form.get('linkedin_url')
-                pessoa.competencias_tecnicas = request.form.get('competencias_tecnicas')
-
-                # Limpa as listas antigas para substituí-las pelas novas.
-                # Isso garante que o perfil reflita exatamente o que foi enviado agora.
-                pessoa.formacoes = []
-                pessoa.experiencias = []
-                pessoa.idiomas = []
-                pessoa.cursos = []
-                
             else:
-                # --- B: PESSOA É NOVA -> CRIA O PERFIL ---
-                flash_message = 'Sua candidatura foi enviada com sucesso! Boa sorte!'
-                
-                pessoa = Pessoa(
-                    nome_completo=request.form.get('nome_completo'),
-                    email=email_enviado,
-                    bairro=request.form.get('bairro'),
-                    cidade=request.form.get('cidade'),
-                    uf=request.form.get('uf'),
-                    telefone1=request.form.get('telefone1'),
-                    linkedin_url=request.form.get('linkedin_url'),
-                    competencias_tecnicas=request.form.get('competencias_tecnicas')
-                )
+                pessoa = Pessoa(email=email_enviado)
                 db.session.add(pessoa)
+                flash_message = 'Sua candidatura foi enviada com sucesso! Boa sorte!'
 
-            # 3. LÓGICA COMUM (executada para pessoas novas E existentes)
-            # Preenche/repreenche as listas de Formação, Experiência, etc.
+            # 2. ATUALIZA (ou preenche pela primeira vez) TODOS os dados da Pessoa
+            pessoa.nome_completo = request.form.get('nome_completo')
+            pessoa.bairro = request.form.get('bairro')
+            pessoa.cidade = request.form.get('cidade')
+            pessoa.uf = request.form.get('uf')
+            pessoa.telefone1 = request.form.get('telefone1')
+            pessoa.linkedin_url = request.form.get('linkedin_url')
+            
+            pessoa.competencias_tecnicas = request.form.get('competencias_tecnicas')
 
-            # Formações
+            # 3. Limpa e REPOPULA os relacionamentos
+            pessoa.formacoes = []
             cursos_formacao = request.form.getlist('form_curso[]')
             for i in range(len(cursos_formacao)):
-                nova_formacao = Formacao(
+                pessoa.formacoes.append(Formacao(
                     curso=cursos_formacao[i],
                     instituicao=request.form.getlist('form_instituicao[]')[i],
                     ano_conclusao=request.form.getlist('form_ano_conclusao[]')[i],
                     conclusao_prevista=request.form.getlist('form_conclusao_prevista[]')[i]
-                )
-                pessoa.formacoes.append(nova_formacao)
+                ))
 
-            # Experiências
+            pessoa.experiencias = []
             empresas_exp = request.form.getlist('exp_empresa[]')
             for i in range(len(empresas_exp)):
-                nova_experiencia = Experiencia(
+                pessoa.experiencias.append(Experiencia(
                     empresa=empresas_exp[i],
                     cargo=request.form.getlist('exp_cargo[]')[i],
                     data_inicio=request.form.getlist('exp_data_inicio[]')[i],
                     data_fim=request.form.getlist('exp_data_fim[]')[i],
                     atividades=request.form.getlist('exp_atividades[]')[i]
-                )
-                pessoa.experiencias.append(nova_experiencia)
+                ))
 
-            # Idiomas
+            pessoa.idiomas = []
             nomes_idioma = request.form.getlist('idioma_nome[]')
             for i in range(len(nomes_idioma)):
-                novo_idioma = Idioma(
+                pessoa.idiomas.append(Idioma(
                     nome=nomes_idioma[i],
                     nivel=request.form.getlist('idioma_nivel[]')[i]
-                )
-                pessoa.idiomas.append(novo_idioma)
+                ))
 
-            # Cursos Complementares
+            pessoa.cursos = []
             nomes_curso = request.form.getlist('curso_nome[]')
             for i in range(len(nomes_curso)):
-                novo_curso = Curso(
+                pessoa.cursos.append(Curso(
                     nome=nomes_curso[i],
                     instituicao=request.form.getlist('curso_instituicao[]')[i],
                     carga_horaria=request.form.getlist('curso_carga_horaria[]')[i],
                     ano_conclusao=request.form.getlist('curso_ano_conclusao[]')[i]
-                )
-                pessoa.cursos.append(novo_curso)
+                ))
 
-            # 4. Cria a nova CANDIDATURA com os dados específicos da vaga
+            # 4. Cria a nova CANDIDATURA
             nova_candidatura = Candidatura(
                 vaga_objetivo=request.form.get('objetivo'),
                 resumo_profissional=request.form.get('resumo_profissional'),
-                pessoa=pessoa 
+                pessoa=pessoa
             )
+            db.session.add(nova_candidatura)
 
-            # Processa o upload do PDF para ESTA candidatura
+            # 5. Processa o upload do PDF
             if 'curriculo_pdf' in request.files:
                 file = request.files['curriculo_pdf']
                 if file and file.filename and allowed_file(file.filename):
+                    # Força o commit para garantir que pessoa.id existe
+                    db.session.flush() 
                     filename = secure_filename(file.filename)
-                    # Cria um nome de arquivo único para evitar conflitos
                     curriculo_filename = f"cv_{pessoa.id}_{datetime.utcnow().strftime('%Y%m%d%H%M%S')}_{filename}"
                     file.save(os.path.join(app.config['UPLOAD_FOLDER'], curriculo_filename))
                     nova_candidatura.curriculo_pdf_path = curriculo_filename
             
-            # 5. Salva tudo no banco de dados
-            db.session.add(nova_candidatura)
+            # 6. Salva TUDO no banco de dados
             db.session.commit()
 
-            # 6. Dispara a mensagem de sucesso e redireciona
             flash(flash_message, 'success')
             return redirect(url_for('cadastro_curriculo'))
+
 
         except Exception as e:
             db.session.rollback()
@@ -521,7 +496,7 @@ def contato():
             msg = Message(
                 subject=f"Nova Mensagem de Contato de {nome}",
                 sender=app.config['MAIL_USERNAME'], # O remetente é o seu e-mail configurado
-                recipients=['wellensouza@gmail.com'] # O destinatário (e-mail da Renata)
+                recipients=[os.getenv('MAIL_RECIPIENT')] # O destinatário 
             )
 
             # Corpo do e-mail em formato HTML para ficar mais bonito
