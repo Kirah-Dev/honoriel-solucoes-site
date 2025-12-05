@@ -25,7 +25,7 @@ def nl2br(value):
     # Escapa o valor para segurança, depois processa
     escaped_value = escape(value)
     # Converte quebras de linha duplas em parágrafos e simples em <br>
-    result = u'\n\n'.join(f'<p>{p.replace(chr(10), "<br>\\n")}</p>' for p in _paragraph_re.split(escaped_value))
+    result = u'\n\n'.join(f'<p>{p.replace(chr(10), "<br>")}</p>' for p in _paragraph_re.split(escaped_value))
     return Markup(result)
 
 

@@ -55,6 +55,8 @@
       </tbody>
     </table>
   </div>
+  <div class="btn-back"><a href="{{ url_for('admin_dashboard') }}" class="btn btn-secondary">&larr; Voltar ao Painel</a>
+  </div>
   {% endblock %}
 
   {% block styles %}
@@ -129,6 +131,10 @@
 
     .actions form {
       margin: 0;
+    }
+
+    .btn-back {
+      padding-top: 15px;
     }
   </style>
   {% endblock %}

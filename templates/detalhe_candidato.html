@@ -40,8 +40,11 @@
   <div class="section">
     <h2><i class="fa-solid fa-user-tie"></i> Resumo da Candidatura Mais Recente</h2>
     {# Exibe o Resumo da candidatura mais recente #}
-    <p class="item-description">{{ (candidatura_recente.resumo_profissional if candidatura_recente else '') or 'Nenhum
-      resumo informado para a última candidatura.' }}</p>
+    {% if candidatura_recente %}
+    <p class="item-description">{{ candidatura_recente.resumo_profissional or 'Nenhum resumo informado.' }}</p>
+    {% else %}
+    <p class="item-description">Nenhuma candidatura encontrada.</p>
+    {% endif %}
   </div>
 </div>
 
