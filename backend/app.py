@@ -262,7 +262,7 @@ def contato_empresa():
         cnpj_cpf = request.form.get('cnpj_cpf')
         email = request.form.get('email')
         telefone = request.form.get('telefone')
-        mensagem = request.form.get('mensagem')
+        mensagem_html = request.form.get('mensagem')
 
         # Validação
         if not nome or not empresa or not email or not mensagem:
@@ -288,7 +288,7 @@ def contato_empresa():
                 <p><strong>Telefone:</strong> {telefone}</p>
                 <hr>
                 <p><strong>Mensagem:</strong></p>
-                <p>{mensagem.replace('\n', '<br>')}</p>
+                <p>{mensagem_html}</p>  
             """
 
             # Envia o e-mail
@@ -485,9 +485,9 @@ def contato():
         email = request.form.get('email')
         telefone = request.form.get('telefone')
         assunto = request.form.get('assunto')
-        mensagem = request.form.get('mensagem')
+        mensagem_html = request.form.get('mensagem')
 
-        if not nome or not email or not mensagem:
+        if not nome or not email or not mensagem_html:
             flash('Nome, e-mail e mensagem são campos obrigatórios.', 'warning')
             return render_template('contato.html')
         
@@ -508,7 +508,7 @@ def contato():
                 <p><strong>Assunto:</strong> {assunto}</p>
                 <hr>
                 <p><strong>Mensagem:</strong></p>
-                <p>{mensagem.replace('\n', '<br>')}</p>
+                <p>{mensagem_html}</p>
             """
 
             # Envia o e-mail
