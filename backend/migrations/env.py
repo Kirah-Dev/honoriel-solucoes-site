@@ -1,4 +1,7 @@
 import logging
+
+from app import db, User, Pessoa, Post
+
 from logging.config import fileConfig
 
 from flask import current_app
@@ -46,9 +49,7 @@ target_db = current_app.extensions['migrate'].db
 
 
 def get_metadata():
-    if hasattr(target_db, 'metadatas'):
-        return target_db.metadatas[None]
-    return target_db.metadata
+    return db.metadata
 
 
 def run_migrations_offline():
